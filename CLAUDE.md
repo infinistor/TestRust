@@ -18,6 +18,7 @@ TESTCore(.NET)를 Rust로 옮긴 프로젝트. `v1.0.0`에서 이식을 마쳤�
 -   cargo workspace. 크레이트는 `crates/<이름>`에 두고 패키지 이름은 `awscli-rust-<이름>`으로 한다.
 -   비동기 런타임은 `tokio`, 취소는 `tokio_util::sync::CancellationToken`으로 통일한다.
 -   라이브러리 크레이트의 오류는 `thiserror`, 바이너리는 `anyhow`를 쓴다.
+-   `unsafe`는 쓰지 않는다(`unsafe_code = "deny"`). 예외는 `crates/cli/src/main.rs`의 Linux(musl) 할당기 옵션 설정 한 곳뿐이다.
 -   큰 C# 파일(`CommandDispatcher.cs`, `UpDownTest.cs`, `UpDownClient.cs`, `INIParser.cs`)은 기능 단위로 나눠 옮긴다.
 
 ## 작업 규칙

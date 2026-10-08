@@ -25,7 +25,7 @@ pwsh ./build-linux.ps1 -Targets root@192.168.31.103:/root/workspace/awscli-rust,
 ```
 
 1.  정리: `dist/linux/awscli-rust/`와 이전 압축 파일을 지운다(빌드 캐시 `target/linux`는 남긴다).
-2.  빌드: 버전은 TESTCore와 같은 `태그_커밋수_해시`다(컨테이너에 `git`을 설치해 계산한다).
+2.  빌드: 버전은 TESTCore와 같은 `태그_커밋수_해시`다(컨테이너에 `git`을 설치해 계산한다). 할당기는 musl 기본 할당기 대신 mimalloc을 쓴다(`v1.0.1`부터, [성능 분석](perf/2026-10-08-s3gw-155.md#put-분석)).
 3.  추가 파일: `sample.ini`, `controller.sample.ini`, `worker.sample.ini`를 함께 둔다.
 4.  압축: `dist/linux/awscli-rust_<버전>.tar.gz`(실행 권한 포함).
 5.  배포: 대상마다 디렉터리가 없으면 만들고(`mkdir -p`), 파일을 올리고, 실행 권한을 준 뒤 `--version`으로 확인한다. 대상 장비의 `config.ini`는 올리지도 덮어쓰지도 않으므로 장비마다 직접 둔다. ssh 키 인증(`BatchMode`)이 되어 있어야 한다.
@@ -57,6 +57,7 @@ cargo test --workspace
 | 버전 | 커밋 | 내용 |
 | --- | --- | --- |
 | `v1.0.0` | `289204a` | TESTCore(.NET, `dotnet-final`) 이식 완료. 성능 비교는 [docs/perf/2026-10-08-ksan.md](perf/2026-10-08-ksan.md) |
+| `v1.0.1` | (태그 참조) | Linux 정적 빌드의 할당기를 mimalloc(메모리 즉시 반환)으로 변경: Put 처리량 .NET과 동등, 요청당 CPU 감소. [docs/perf/2026-10-08-s3gw-155.md](perf/2026-10-08-s3gw-155.md) |
 
 ## TESTCore에서 전환
 

@@ -55,6 +55,11 @@ rust_decimal.workspace = true
 tracing.workspace = true
 tracing-subscriber.workspace = true
 
+# Linux 정적(musl) 빌드에서만 mimalloc을 쓴다(src/main.rs).
+[target.'cfg(target_env = "musl")'.dependencies]
+mimalloc.workspace = true
+libmimalloc-sys.workspace = true
+
 [lints]
 workspace = true
 

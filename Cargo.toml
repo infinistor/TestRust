@@ -23,6 +23,8 @@ tokio = { version = "1", features = ["full"] }
 tokio-util = "0.7"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["fmt", "std"] }
+mimalloc = { version = "0.1", default-features = false }
+libmimalloc-sys = { version = "0.1", features = ["extended"] }
 chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["raw_value"] }
@@ -55,7 +57,8 @@ mysql_async = { version = "0.37", default-features = false, features = ["minimal
 encoding_rs = "0.8"
 
 [workspace.lints.rust]
-unsafe_code = "forbid"
+# deny: crates/cli/src/main.rs의 할당기 옵션 설정만 #[allow(unsafe_code)]로 허용한다.
+unsafe_code = "deny"
 
 [workspace.lints.clippy]
 all = { level = "warn", priority = -1 }
