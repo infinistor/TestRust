@@ -11,3 +11,4 @@ tools/dotnet-oracle/obj/
 .claude/worktrees/
 ksan.ini
 dist/
+gw.ini
