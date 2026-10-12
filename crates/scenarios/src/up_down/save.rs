@@ -3,7 +3,7 @@
 //! `Save`에 확장자가 있으면(`Path.HasExtension`) 그 파일에, 없으면 디렉터리로 보고
 //! `{SanitizeFileName(이름)}_{yyyyMMdd_HHmmss}.json`을 만들어 `Path.Combine(Save, 파일 이름)` 경로에 쓴다.
 
-use awscli_rust_model::UpDownResult;
+use testrust_model::UpDownResult;
 use tracing::{error, info};
 
 use crate::util::{has_extension, path_combine, sanitize_file_name};

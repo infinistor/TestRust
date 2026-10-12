@@ -39,7 +39,7 @@ const TESTS: [(&str, &str); 5] = [
 const CSV_HEADER: &str = "RunId,SampleId,TestType,Scope,WorkerId,CollectedAtUtc,WorkerSampleAtUtc,ElapsedSeconds,IntervalSeconds,State,Available,IsFinal,Error,ReadSuccess,ReadFailed,ReadOpsPerSecond,WriteSuccess,WriteFailed,WriteOpsPerSecond,HeadSuccess,HeadFailed,HeadOpsPerSecond,DeleteSuccess,DeleteFailed,DeleteOpsPerSecond,ListSuccess,ListFailed,ListOpsPerSecond,EstimatedReadBytesPerSecond,EstimatedWriteBytesPerSecond,ExpectedWorkers,ReportedWorkers";
 
 fn rust_exe() -> PathBuf {
-    PathBuf::from(env!("CARGO_BIN_EXE_awscli-rust"))
+    PathBuf::from(env!("CARGO_BIN_EXE_TestRust"))
 }
 
 fn free_port() -> u16 {

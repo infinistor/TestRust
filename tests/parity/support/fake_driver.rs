@@ -3,8 +3,8 @@
 
 use std::sync::{Arc, Mutex};
 
-use awscli_rust_common::{DotnetDateTimeOffset, to_web_json};
-use awscli_rust_distributed::contracts::{RunResult, RunSnapshot, WorkerStatus};
+use testrust_common::{DotnetDateTimeOffset, to_web_json};
+use testrust_distributed::contracts::{RunResult, RunSnapshot, WorkerStatus};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::{TcpListener, TcpStream};
 

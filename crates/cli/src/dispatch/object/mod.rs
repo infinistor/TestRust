@@ -38,7 +38,7 @@ mod settings;
 mod write;
 
 use super::input::blank;
-use awscli_rust_s3::S3Error;
+use testrust_s3::S3Error;
 
 use super::{CommandContext, CommandError, CommandResult};
 use crate::menu::MenuList;
@@ -126,7 +126,7 @@ fn rejected(ctx: &CommandContext, checks: &[Check]) -> bool {
             Check::FilePath if blank(&o.file_path) => usage::ERROR_FILE_PATH,
             Check::ConfigPath if blank(&o.file_path) => usage::ERROR_CONFIG_PATH,
             Check::FileExists
-                if !awscli_rust_scenarios::files::file_exists(
+                if !testrust_scenarios::files::file_exists(
                     o.file_path.as_deref().unwrap_or_default(),
                 ) =>
             {

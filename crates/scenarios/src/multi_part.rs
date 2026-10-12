@@ -17,12 +17,12 @@
 use std::io::{Read, Seek, SeekFrom};
 use std::sync::Arc;
 
-use awscli_rust_common::dotnet_format::decimal_text;
-use awscli_rust_common::dotnet_http::status_name;
-use awscli_rust_config::UserData;
-use awscli_rust_model::TimeWatcher;
-use awscli_rust_s3::s3_client::{PartETag, PutBody};
-use awscli_rust_s3::{S3Client, S3Error};
+use testrust_common::dotnet_format::decimal_text;
+use testrust_common::dotnet_http::status_name;
+use testrust_config::UserData;
+use testrust_model::TimeWatcher;
+use testrust_s3::s3_client::{PartETag, PutBody};
+use testrust_s3::{S3Client, S3Error};
 use tokio::sync::Semaphore;
 use tokio::task::JoinHandle;
 use tracing::{error, info};

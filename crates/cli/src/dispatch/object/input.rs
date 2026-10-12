@@ -9,11 +9,11 @@ use aws_sdk_s3::primitives::DateTime;
 use aws_sdk_s3::types::{
     ObjectIdentifier, ObjectLockLegalHold, ObjectLockLegalHoldStatus, Tag, Tagging,
 };
-use awscli_rust_common::DotnetDateTime;
-use awscli_rust_common::json::{
+use testrust_common::DotnetDateTime;
+use testrust_common::json::{
     Deserializer, FromJson, JsonError, ReadOptions, Token, deserialize, list_type_name,
 };
-use awscli_rust_s3::S3Error;
+use testrust_s3::S3Error;
 
 use crate::dispatch::CommandError;
 
@@ -199,12 +199,12 @@ impl TaggingInput {
                     .key(
                         tag.key
                             .clone()
-                            .unwrap_or_else(|| awscli_rust_s3::UNSET.to_string()),
+                            .unwrap_or_else(|| testrust_s3::UNSET.to_string()),
                     )
                     .value(
                         tag.value
                             .clone()
-                            .unwrap_or_else(|| awscli_rust_s3::UNSET.to_string()),
+                            .unwrap_or_else(|| testrust_s3::UNSET.to_string()),
                     )
                     .build()
                     .map_err(|e| S3Error::Request(e.to_string()))

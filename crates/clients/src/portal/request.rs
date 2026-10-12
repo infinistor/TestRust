@@ -1,5 +1,5 @@
 //! TESTCore `Portal/Request/*` 이식. `ToJsonString()`과 같은 JSON을 만든다
-//! (`awscli_rust_common::to_dotnet_json`, 속성은 선언 순서, 읽기 전용 속성 포함).
+//! (`testrust_common::to_dotnet_json`, 속성은 선언 순서, 읽기 전용 속성 포함).
 
 use serde::ser::{Serialize, SerializeStruct, Serializer};
 

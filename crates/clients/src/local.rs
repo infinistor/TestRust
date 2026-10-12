@@ -13,10 +13,10 @@ use std::io::{self, Read, Write};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicI32, Ordering};
 
-use awscli_rust_config::{UpDownClientConfig, UtilError};
-use awscli_rust_model::{QuitFlag, TestClient, TestStats};
 use md5::{Digest, Md5};
 use rand::Rng;
+use testrust_config::{UpDownClientConfig, UtilError};
+use testrust_model::{QuitFlag, TestClient, TestStats};
 use tracing::{error, warn};
 
 use crate::file_util::file_etag;

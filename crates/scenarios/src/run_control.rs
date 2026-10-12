@@ -9,8 +9,8 @@
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
 
-use awscli_rust_common::DotnetDateTimeOffset;
 use chrono::Utc;
+use testrust_common::DotnetDateTimeOffset;
 use tokio::sync::watch;
 use tokio_util::sync::CancellationToken;
 

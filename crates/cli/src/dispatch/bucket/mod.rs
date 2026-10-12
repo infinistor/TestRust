@@ -18,7 +18,7 @@ use super::input::blank;
 use std::time::Instant;
 
 use aws_sdk_s3::types::{BucketCannedAcl, BucketVersioningStatus, ObjectOwnership};
-use awscli_rust_common::dotnet_http::status_name;
+use testrust_common::dotnet_http::status_name;
 use tracing::{error, info};
 
 use super::output::{self, pad_right, utf16_len};

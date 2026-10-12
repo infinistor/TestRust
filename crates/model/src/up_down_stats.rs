@@ -5,9 +5,9 @@
 //!
 //! 원본 그대로 둔 점: `PrintMix`는 Read 줄에 Write의 급변 표시를, Write 줄에 Read의 급변 표시를 쓴다.
 
-use awscli_rust_common::dotnet_format::{align, decimal_text, fixed_aligned};
-use awscli_rust_config::{EnumBucketTypes, MainConfig, UpDownConfig};
 use rust_decimal::Decimal;
+use testrust_common::dotnet_format::{align, decimal_text, fixed_aligned};
+use testrust_config::{EnumBucketTypes, MainConfig, UpDownConfig};
 use tracing::info;
 
 use crate::stats::{TestClient, TimeStats, WriteTimeStats};

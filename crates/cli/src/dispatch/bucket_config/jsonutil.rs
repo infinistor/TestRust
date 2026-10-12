@@ -7,9 +7,7 @@
 //!   `ArgumentNullException`이 난다([`ConstantValue::get`]).
 //! - 생성자가 둘인 `S3Permission`은 객체를 읽으려 하면 `NotSupportedException`이다.
 
-use awscli_rust_common::json::{
-    Deserializer, FromJson, JsonError, ReadOptions, Token, deserialize,
-};
+use testrust_common::json::{Deserializer, FromJson, JsonError, ReadOptions, Token, deserialize};
 
 use crate::dispatch::CommandError;
 

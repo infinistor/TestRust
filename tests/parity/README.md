@@ -1,6 +1,6 @@
 # parity 테스트
 
-TESTCore(.NET)와 awscli-rust의 외부 동작을 비교한다.
+TESTCore(.NET)와 TestRust의 외부 동작을 비교한다.
 
 -   `baseline/`: .NET으로 수집한 기준 출력. 콘솔 출력은 UTF-8로 저장하고, 로그 줄(`INFO `, `ERROR` 등)은 필요할 때만 남긴다.
     -   `version.txt`: `TestCore --version` 출력 (`78004ff` 빌드)

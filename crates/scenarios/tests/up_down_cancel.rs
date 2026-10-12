@@ -3,8 +3,8 @@
 
 use std::time::Duration;
 
-use awscli_rust_config::{EnumBucketTypes, MainConfig, UpDownConfig, UserData};
-use awscli_rust_scenarios::up_down::UpDownTest;
+use testrust_config::{EnumBucketTypes, MainConfig, UpDownConfig, UserData};
+use testrust_scenarios::up_down::UpDownTest;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpListener;
 use tokio_util::sync::CancellationToken;

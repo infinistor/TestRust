@@ -3,8 +3,8 @@
 
 use std::path::Path;
 
-use awscli_rust_s3::dotnet_uri::DotnetUri;
 use serde_json::{Value, json};
+use testrust_s3::dotnet_uri::DotnetUri;
 
 #[test]
 fn uri_matches_dotnet() {

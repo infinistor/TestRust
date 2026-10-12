@@ -16,8 +16,8 @@
 //! 다른 점: 3xx 응답을 따라가지 않는다(.NET 기본값은 자동 리디렉션). 응답 본문의 `charset`은 무시하고
 //! UTF-8로 읽는다. 네트워크 오류 메시지는 운영체제·런타임마다 다르다.
 
-use awscli_rust_common::dotnet_http::status_name;
 use http::Method;
+use testrust_common::dotnet_http::status_name;
 
 use crate::http::{HTTP_TIMEOUT, Transport, TransportError};
 use crate::json::{FromJson, JsonError, ReadOptions, deserialize};

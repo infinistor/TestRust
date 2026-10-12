@@ -18,6 +18,6 @@ pub struct RequestMoverStart {
 impl RequestMoverStart {
     /// 원본 `ToString()`: `ToJsonString()`
     pub fn to_json_string(&self) -> String {
-        awscli_rust_common::to_dotnet_json(self)
+        testrust_common::to_dotnet_json(self)
     }
 }

@@ -7,14 +7,14 @@ use aws_sdk_s3::types::{
     DefaultRetention, ObjectLockConfiguration, ObjectLockEnabled, ObjectLockRetention,
     ObjectLockRetentionMode, ObjectLockRule,
 };
-use awscli_rust_common::dotnet_http::status_name;
 use chrono::{DateTime, Local, NaiveDate, NaiveDateTime, TimeZone, Utc};
+use testrust_common::dotnet_http::status_name;
 use tracing::{error, info};
 
 use super::input::{LegalHold, TaggingInput, parse};
 use super::{S3Result, bucket_name, key_name};
 use crate::dispatch::{CommandContext, CommandResult};
-use awscli_rust_scenarios::files::read_all_text;
+use testrust_scenarios::files::read_all_text;
 
 pub(super) async fn put_object_legal_hold(ctx: &CommandContext) -> CommandResult {
     let (bucket, key) = (bucket_name(ctx), key_name(ctx));

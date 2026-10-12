@@ -30,12 +30,12 @@ use std::sync::atomic::{AtomicI64, Ordering};
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
-use awscli_rust_common::dotnet_format::{align, fixed, fixed_aligned};
-use awscli_rust_config::UserData;
-use awscli_rust_model::TimeWatcher;
-use awscli_rust_model::units::file_size_unit;
-use awscli_rust_s3::S3Client;
 use rust_decimal::Decimal;
+use testrust_common::dotnet_format::{align, fixed, fixed_aligned};
+use testrust_config::UserData;
+use testrust_model::TimeWatcher;
+use testrust_model::units::file_size_unit;
+use testrust_s3::S3Client;
 use tracing::{error, info};
 
 use crate::ScenarioError;

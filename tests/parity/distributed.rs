@@ -7,16 +7,16 @@
 use std::collections::BTreeMap;
 use std::path::PathBuf;
 
-use awscli_rust_common::dotnet_datetime::DateTimeKind;
-use awscli_rust_common::{
-    DotnetDateTime, DotnetDateTimeOffset, from_web_json, to_dotnet_json, to_web_json,
-};
-use awscli_rust_config::UserData;
-use awscli_rust_distributed::contracts::{
-    RunResult, RunSnapshot, StartRequest, TestRequest, WorkerStatus, WorkloadSettings,
-};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
+use testrust_common::dotnet_datetime::DateTimeKind;
+use testrust_common::{
+    DotnetDateTime, DotnetDateTimeOffset, from_web_json, to_dotnet_json, to_web_json,
+};
+use testrust_config::UserData;
+use testrust_distributed::contracts::{
+    RunResult, RunSnapshot, StartRequest, TestRequest, WorkerStatus, WorkloadSettings,
+};
 
 fn baseline() -> BTreeMap<String, String> {
     let path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))

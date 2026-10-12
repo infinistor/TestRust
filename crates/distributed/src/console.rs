@@ -2,8 +2,8 @@
 //!
 //! 분산 합계를 기존 부하 테스트의 진행/최종 결과 형식(`{label,-15} : {value,9}`)으로 만든다. 줄바꿈은 원본처럼 `\n`이다.
 
-use awscli_rust_common::dotnet_format::{align, fixed};
 use rust_decimal::Decimal;
+use testrust_common::dotnet_format::{align, fixed};
 
 use crate::contracts::RunSnapshot;
 
@@ -19,7 +19,7 @@ pub struct FormatOptions {
 
 /// 메시지를 원본 `log.Info`처럼 INFO 로그로 남긴다.
 pub fn log(message: &str) {
-    awscli_rust_model::up_down_stats::log_info(message);
+    testrust_model::up_down_stats::log_info(message);
 }
 
 /// `double.ToString("F3", InvariantCulture)`.

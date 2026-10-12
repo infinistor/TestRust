@@ -5,8 +5,8 @@
 
 use std::path::Path;
 
-use awscli_rust_cli::options::{CommandOptions, ParseError, parse};
 use serde_json::{Map, Value, json};
+use testrust_cli::options::{CommandOptions, ParseError, parse};
 
 fn baseline(name: &str) -> String {
     let path = Path::new(env!("CARGO_MANIFEST_DIR"))

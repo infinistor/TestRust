@@ -19,15 +19,15 @@
 
 use std::time::Duration;
 
-use awscli_rust_clients::file_util::create_random_file;
-use awscli_rust_clients::mover::{
+use testrust_clients::file_util::create_random_file;
+use testrust_clients::mover::{
     MoverClient, MoverError, MoverStatus, RequestMoverStart, SourceConfig, TargetConfig,
 };
-use awscli_rust_common::dotnet_http::status_name;
-use awscli_rust_config::{MainConfig, MoverConfig, UserData};
-use awscli_rust_model::TimeWatcher;
-use awscli_rust_s3::S3Client;
-use awscli_rust_s3::s3_client::PutBody;
+use testrust_common::dotnet_http::status_name;
+use testrust_config::{MainConfig, MoverConfig, UserData};
+use testrust_model::TimeWatcher;
+use testrust_s3::S3Client;
+use testrust_s3::s3_client::PutBody;
 use tracing::{error, info};
 
 use crate::ScenarioError;

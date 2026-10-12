@@ -17,8 +17,8 @@
 
 use std::time::Instant;
 
-use awscli_rust_common::to_dotnet_json;
-use awscli_rust_s3::ksan::{KsanClient, KsanError};
+use testrust_common::to_dotnet_json;
+use testrust_s3::ksan::{KsanClient, KsanError};
 use tracing::{error, info};
 
 use super::output::{LINE, pad_right, utf16_len};
@@ -137,7 +137,7 @@ pub(super) async fn run(ctx: &mut CommandContext, menu: MenuList) -> CommandResu
                         key,
                         data.last_modified.format("yyyy-mm-dd HH:MM:ss"),
                         // `Utility.GetFileSizeUint(size)`
-                        awscli_rust_model::units::file_size_unit(
+                        testrust_model::units::file_size_unit(
                             i64::from(data.size).into(),
                             false,
                             false,

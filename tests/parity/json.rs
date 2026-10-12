@@ -3,8 +3,8 @@
 
 use std::path::Path;
 
-use awscli_rust_common::dotnet_json::{NEW_LINE, to_dotnet_json};
 use serde::Serialize;
+use testrust_common::dotnet_json::{NEW_LINE, to_dotnet_json};
 
 #[derive(Serialize)]
 #[serde(rename_all = "PascalCase")]

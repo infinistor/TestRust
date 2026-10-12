@@ -310,7 +310,7 @@ impl UpDownClient {
                     &self.bucket_name,
                     Some(&prefix),
                     Some(&next_key_marker),
-                    awscli_rust_s3::s3_client::S3_MAX_KEYS,
+                    testrust_s3::s3_client::S3_MAX_KEYS,
                     None,
                     None,
                 )
@@ -444,7 +444,7 @@ impl UpDownClient {
                     &self.bucket_name,
                     Some(&prefix),
                     None,
-                    awscli_rust_s3::s3_client::S3_MAX_KEYS,
+                    testrust_s3::s3_client::S3_MAX_KEYS,
                     None,
                     None,
                 )
@@ -627,7 +627,7 @@ impl UpDownClient {
                     Some(&prefix),
                     None,
                     None,
-                    awscli_rust_s3::s3_client::S3_MAX_KEYS,
+                    testrust_s3::s3_client::S3_MAX_KEYS,
                     None,
                 )
                 .await?
@@ -1040,7 +1040,7 @@ impl UpDownClient {
                 .put_object(
                     &self.bucket_name,
                     &format!("{prefix}{i:07}"),
-                    awscli_rust_s3::s3_client::PutBody::Text("1".to_string()),
+                    testrust_s3::s3_client::PutBody::Text("1".to_string()),
                     false,
                     None,
                 )

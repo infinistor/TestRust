@@ -18,9 +18,9 @@
 use std::sync::Arc;
 
 use aws_sdk_s3::types::{AccessControlPolicy, Grant, Grantee, ObjectLockEnabled, Permission, Type};
-use awscli_rust_common::dotnet_format::bool_text as dotnet_bool;
-use awscli_rust_common::dotnet_http::status_name;
-use awscli_rust_s3::{S3Client, S3Error};
+use testrust_common::dotnet_format::bool_text as dotnet_bool;
+use testrust_common::dotnet_http::status_name;
+use testrust_s3::{S3Client, S3Error};
 use tokio::sync::Semaphore;
 use tokio::task::JoinSet;
 use tracing::{error, info, warn};
@@ -300,7 +300,7 @@ impl ClearTest {
 
 /// 원본 `Versions`(버전과 삭제 마커를 문서 순서로 담은 목록)를 `keep(is_marker)`로 거른 키·버전 ID.
 fn version_keys(
-    output: &awscli_rust_s3::s3_client::ListVersions,
+    output: &testrust_s3::s3_client::ListVersions,
     keep: impl Fn(bool) -> bool,
 ) -> Keys {
     output

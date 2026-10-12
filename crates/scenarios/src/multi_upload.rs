@@ -15,9 +15,9 @@
 //! - `partSize`가 음수이면 `RandomTextLong`이 `ArgumentOutOfRangeException`을 던진다(업로드 초기화 뒤).
 
 use aws_sdk_s3::primitives::ByteStream;
-use awscli_rust_config::util::random_text_long;
-use awscli_rust_s3::S3Client;
-use awscli_rust_s3::s3_client::{PartETag, PutBody};
+use testrust_config::util::random_text_long;
+use testrust_s3::S3Client;
+use testrust_s3::s3_client::{PartETag, PutBody};
 use tracing::{error, info};
 
 use crate::ScenarioError;
@@ -49,7 +49,7 @@ async fn get_body(body: ByteStream) -> Result<String, ScenarioError> {
 }
 
 /// `GetObject`의 모델링된 예외(`NoSuchKeyException`, `InvalidObjectStateException`)를 구분해 바꾼다.
-fn get_error(e: awscli_rust_s3::S3Error) -> ScenarioError {
+fn get_error(e: testrust_s3::S3Error) -> ScenarioError {
     ScenarioError::s3(e, &["NoSuchKey", "InvalidObjectState"])
 }
 

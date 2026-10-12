@@ -4,7 +4,7 @@
 //! `NullReferenceException`. 조건이 없는 필터는 요청에 `Filter`를 싣지 않는다.
 
 use aws_sdk_s3::types::{MetricsAndOperator, MetricsConfiguration, MetricsFilter};
-use awscli_rust_common::json::{Deserializer, FromJson, JsonError, Token};
+use testrust_common::json::{Deserializer, FromJson, JsonError, Token};
 
 use super::filter::{MyFilter, Predicate};
 use super::{CommandError, built, null_reference, required_id};

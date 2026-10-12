@@ -1,5 +1,5 @@
 [package]
-name = "awscli-rust-clients"
+name = "testrust-clients"
 description = "Local·Curl·ZeroMq·MultiSystem·UpDown 클라이언트, Portal·Jenkins·Mover"
 version.workspace = true
 edition.workspace = true
@@ -7,10 +7,10 @@ repository.workspace = true
 publish.workspace = true
 
 [dependencies]
-awscli-rust-common.workspace = true
-awscli-rust-config.workspace = true
-awscli-rust-model.workspace = true
-awscli-rust-s3.workspace = true
+testrust-common.workspace = true
+testrust-config.workspace = true
+testrust-model.workspace = true
+testrust-s3.workspace = true
 aws-sdk-s3.workspace = true
 base64.workspace = true
 bytes.workspace = true

@@ -42,14 +42,14 @@ use aws_sdk_s3::types::{
     BucketLifecycleConfiguration, BucketVersioningStatus, ExpirationStatus, LifecycleExpiration,
     LifecycleRule, NoncurrentVersionExpiration,
 };
-use awscli_rust_clients::file_util::create_random_file;
-use awscli_rust_clients::up_down::{UpDownClient, UpDownError};
-use awscli_rust_common::DotnetDateTime;
-use awscli_rust_config::{EnumBucketTypes, MainConfig, UpDownClientConfig, UpDownConfig, UserData};
-use awscli_rust_model::up_down_stats::log_info;
-use awscli_rust_model::{TimeWatcher, UpDownStats};
-use awscli_rust_s3::S3Client;
 use rust_decimal::Decimal;
+use testrust_clients::file_util::create_random_file;
+use testrust_clients::up_down::{UpDownClient, UpDownError};
+use testrust_common::DotnetDateTime;
+use testrust_config::{EnumBucketTypes, MainConfig, UpDownClientConfig, UpDownConfig, UserData};
+use testrust_model::up_down_stats::log_info;
+use testrust_model::{TimeWatcher, UpDownStats};
+use testrust_s3::S3Client;
 use tokio_util::sync::CancellationToken;
 use tracing::{error, info};
 
@@ -1048,7 +1048,7 @@ impl UpDownTest {
         config: &UpDownConfig,
         main_config: &MainConfig,
         elapsed_seconds: f64,
-    ) -> awscli_rust_model::UpDownResult {
+    ) -> testrust_model::UpDownResult {
         let clients = clients.lock().unwrap_or_else(|e| e.into_inner()).clone();
         let refs: Vec<&UpDownClient> = clients.iter().map(|c| &**c).collect();
         let mut stats = UpDownStats::new(main_config.file_size);

@@ -22,10 +22,10 @@
 //! - `Size`·`ContentLength` 등 `null`일 수 있는 값은 로그에서 빈 문자열이 된다.
 
 use aws_sdk_s3::types::{ChecksumType, Tag};
-use awscli_rust_config::{CompareConfig, UserData};
-use awscli_rust_s3::S3Client;
-use awscli_rust_s3::s3_client::ListVersions;
 use chrono::{DateTime, Utc};
+use testrust_config::{CompareConfig, UserData};
+use testrust_s3::S3Client;
+use testrust_s3::s3_client::ListVersions;
 use tracing::{error, info};
 
 use crate::ScenarioError;
@@ -38,7 +38,7 @@ fn client_of(user: &UserData) -> S3Client {
 
 /// .NET `DateTime.ToString()`(ko-KR, `yyyy-MM-dd tt h:mm:ss`). 시각은 UTC 그대로.
 pub(crate) fn ko_kr_datetime(time: DateTime<Utc>) -> String {
-    awscli_rust_common::dotnet_format::ko_kr_datetime(&time)
+    testrust_common::dotnet_format::ko_kr_datetime(&time)
 }
 
 /// SDK 시각을 [`ko_kr_datetime`]으로. `DateTime?`가 `null`이면 빈 문자열(문자열 보간).

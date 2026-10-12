@@ -13,12 +13,12 @@ TESTCore `Distributed/*`를 옮겼다. `--controller`가 여러 `--worker`에 �
 | `result_writer` | `ResultWriter.cs` |
 | `console` | `ResultConsoleFormatter.cs` |
 | `lib::run` | `DistributedApplication.cs` |
-| `awscli_rust_scenarios::run_control` | `RunControl.cs` |
+| `testrust_scenarios::run_control` | `RunControl.cs` |
 
 ## 통신 계약
 
 -   serde 이름은 .NET 속성 이름(PascalCase)으로 둔다.
--   통신은 `awscli_rust_common::{to_web_json, from_web_json}`을 쓴다. 쓸 때는 `JsonSerializerDefaults.Web`처럼 camelCase로 압축하고, 읽을 때는 첫 글자를 대문자로 바꿔 받는다.
+-   통신은 `testrust_common::{to_web_json, from_web_json}`을 쓴다. 쓸 때는 `JsonSerializerDefaults.Web`처럼 camelCase로 압축하고, 읽을 때는 첫 글자를 대문자로 바꿔 받는다.
 -   Worker 결과 파일과 Controller 결과 JSON은 `to_dotnet_json`(PascalCase, 들여쓰기)으로 쓴다.
 -   날짜 형식
     -   `DateTimeOffset`은 `DotnetDateTimeOffset`을 쓴다. JSON에서는 소수 끝의 0을 지우고 `+00:00`을 붙인다. CSV에서는 `"O"`(소수 7자리)로 쓴다.

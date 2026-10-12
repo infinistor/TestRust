@@ -14,9 +14,9 @@ mod client_parity;
 mod http_capture;
 
 use ::zeromq::{Endpoint, RepSocket, Socket, SocketRecv, SocketSend};
-use awscli_rust_clients::zeromq as client;
 use client_parity::{actual_logs, case_names, expected_logs, parity_root, read_json, with_logs};
 use serde_json::Value;
+use testrust_clients::zeromq as client;
 
 /// REP 서버를 띄워 요청 하나를 받고 `reply`로 응답한다. (포트, 받은 프레임 태스크)
 async fn start_server(reply: String) -> (u16, tokio::task::JoinHandle<String>) {
@@ -116,7 +116,7 @@ async fn pause_waits_until_server_appears() {
 //
 //   dotnet build tools/dotnet-oracle -p:TestCoreBin=E:\Code\Git\TESTCore\bin\TestCore
 //   $env:TESTCORE_BIN = "E:\Code\Git\TESTCore\bin\TestCore"
-//   cargo test -p awscli-rust-clients --test parity_zeromq -- --ignored
+//   cargo test -p testrust-clients --test parity_zeromq -- --ignored
 
 fn oracle_command() -> tokio::process::Command {
     let dll = parity_root().join("../../tools/dotnet-oracle/bin/Debug/net10.0/DotnetOracle.dll");

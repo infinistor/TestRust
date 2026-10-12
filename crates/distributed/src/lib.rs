@@ -1,7 +1,7 @@
 //! 분산 실행(TESTCore `Distributed/*`): Controller가 여러 Worker에 같은 부하 테스트를 나눠 실행하고 결과를 모은다.
 //!
 //! 통신은 Worker의 `/driver` HTTP API(JSON, camelCase)다. .NET Controller·Worker와 섞어 쓸 수 있어야 하므로 계약
-//! 형식([`contracts`])과 상태 전이(`awscli_rust_scenarios::run_control`)를 원본과 같게 둔다.
+//! 형식([`contracts`])과 상태 전이(`testrust_scenarios::run_control`)를 원본과 같게 둔다.
 
 pub mod console;
 pub mod contracts;
@@ -12,9 +12,9 @@ pub mod runner;
 pub mod settings;
 pub mod worker;
 
-use awscli_rust_config::Config;
-use awscli_rust_scenarios::ScenarioError;
-use awscli_rust_scenarios::shutdown::{self, Handler};
+use testrust_config::Config;
+use testrust_scenarios::ScenarioError;
+use testrust_scenarios::shutdown::{self, Handler};
 use tokio_util::sync::CancellationToken;
 
 use crate::contracts::RunOptions;

@@ -3,8 +3,8 @@
 use std::io;
 use std::path::{Path, PathBuf};
 
-use awscli_rust_s3::S3Error;
-use awscli_rust_s3::s3_client::error::full_path;
+use testrust_s3::S3Error;
+use testrust_s3::s3_client::error::full_path;
 
 use crate::ScenarioError;
 
@@ -74,7 +74,7 @@ pub fn decode_text(bytes: &[u8]) -> String {
 }
 
 /// `System.Text.Json.JsonException`.
-pub fn json_error(error: awscli_rust_common::json::JsonError) -> ScenarioError {
+pub fn json_error(error: testrust_common::json::JsonError) -> ScenarioError {
     ScenarioError::new("System.Text.Json.JsonException", error.0)
 }
 

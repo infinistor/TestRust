@@ -5,10 +5,10 @@
 use std::collections::BTreeMap;
 use std::path::Path;
 
-use awscli_rust_s3::signer::{Headers, SignError, X_AMZ_DATE};
-use awscli_rust_s3::{AuthorizationHeaderSigner, DotnetUri};
 use chrono::{NaiveDateTime, TimeZone, Utc};
 use serde_json::Value;
+use testrust_s3::signer::{Headers, SignError, X_AMZ_DATE};
+use testrust_s3::{AuthorizationHeaderSigner, DotnetUri};
 
 const FIXTURES: &[&str] = &[
     "get-tag-index",

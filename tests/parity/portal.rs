@@ -14,9 +14,6 @@ mod client_parity;
 #[path = "support/http_capture.rs"]
 mod http_capture;
 
-use awscli_rust_clients::portal::{PortalError, PortalManager};
-use awscli_rust_common::to_dotnet_json;
-use awscli_rust_config::PortalConfig;
 use client_parity::{
     actual_logs, actual_outcome, actual_requests, case_names, expected_logs, expected_outcome,
     expected_requests, mask_local_regdate_in_outcome, parity_root, read_json, with_logs,
@@ -24,6 +21,9 @@ use client_parity::{
 use http_capture::{CannedResponse, CaptureServer};
 use serde::Serialize;
 use serde_json::Value;
+use testrust_clients::portal::{PortalError, PortalManager};
+use testrust_common::to_dotnet_json;
+use testrust_config::PortalConfig;
 
 /// 객체 결과는 `ToJsonString` 문자열로, 없으면 `null`.
 fn as_json<T: Serialize>(value: Option<T>) -> Value {

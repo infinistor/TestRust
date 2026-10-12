@@ -1,19 +1,19 @@
-# awscli-rust Linux 빌드·배포 스크립트 (TESTCore build.ps1·upload.ps1 흐름)
+# TestRust Linux 빌드·배포 스크립트 (TESTCore build.ps1·upload.ps1 흐름)
 #
 # rust:alpine 컨테이너(Docker Desktop 필요)에서 x86_64-unknown-linux-musl 정적 바이너리로 빌드한다. 필요한 라이브러리가
 # 모두 들어 있어 대상 장비의 glibc 버전과 관계없이 x86_64 Linux에서 그대로 실행된다(Windows .exe는 Linux에서 쓸 수 없다).
 #
-#   [1/4] 이전 출력 정리   dist/linux/awscli-rust (빌드 캐시 target/linux는 남긴다)
+#   [1/4] 이전 출력 정리   dist/linux/TestRust (빌드 캐시 target/linux는 남긴다)
 #   [2/4] 빌드             버전은 TESTCore와 같은 `태그_커밋수_해시`
 #   [3/4] 추가 파일 복사   sample.ini, controller.sample.ini, worker.sample.ini
-#   [4/4] 압축             dist/linux/awscli-rust_<버전>.tar.gz (실행 권한 포함)
+#   [4/4] 압축             dist/linux/TestRust_<버전>.tar.gz (실행 권한 포함)
 #   [배포]                 -Targets의 각 `user@host:/경로`로 올린다. 경로가 없으면 만들고, 실행 권한을 주고 --version으로 확인한다.
 #                          config.ini 등 대상 장비에 있는 다른 파일은 건드리지 않는다.
 #
 # 사용법(저장소 루트에서):
 #   pwsh ./build-linux.ps1                                  # 빌드 후 기본 대상에 배포
 #   pwsh ./build-linux.ps1 -SkipDeploy                      # 빌드만
-#   pwsh ./build-linux.ps1 -Targets root@192.168.31.103:/root/workspace/awscli-rust, root@192.168.31.104:/root/workspace/awscli-rust
+#   pwsh ./build-linux.ps1 -Targets root@192.168.31.103:/root/workspace/TestRust, root@192.168.31.104:/root/workspace/TestRust
 param(
 	[string]$OutputDir = (Join-Path $PSScriptRoot "dist\linux"),
 	[string[]]$Targets = @(
@@ -24,13 +24,13 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$ProjectName = "awscli-rust"
+$ProjectName = "TestRust"
 $ProjectRoot = $PSScriptRoot
 $BinDir = Join-Path $OutputDir $ProjectName
 $ExtraFiles = @("sample.ini", "controller.sample.ini", "worker.sample.ini")
 
 Write-Host "=====================================" -ForegroundColor Cyan
-Write-Host "awscli-rust Linux 빌드 스크립트" -ForegroundColor Cyan
+Write-Host "TestRust Linux 빌드 스크립트" -ForegroundColor Cyan
 Write-Host "=====================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -50,8 +50,8 @@ Write-Host ""
 
 # Step 2: Build (레지스트리 캐시는 이름 있는 볼륨, 빌드 결과는 Windows 빌드와 섞이지 않게 target/linux)
 Write-Host "[2/4] Linux 정적 바이너리 빌드 중 (x86_64-unknown-linux-musl)..." -ForegroundColor Yellow
-docker run --rm -v "${ProjectRoot}:/src" -v awscli-rust-cargo-registry:/usr/local/cargo/registry -w /src rust:alpine `
-	sh -c "apk add --no-cache musl-dev gcc git >/dev/null && git config --global --add safe.directory /src && cargo build --release -p awscli-rust-cli --target-dir /src/target/linux"
+docker run --rm -v "${ProjectRoot}:/src" -v testrust-cargo-registry:/usr/local/cargo/registry -w /src rust:alpine `
+	sh -c "apk add --no-cache musl-dev gcc git >/dev/null && git config --global --add safe.directory /src && cargo build --release -p testrust-cli --target-dir /src/target/linux"
 if ($LASTEXITCODE -ne 0) {
 	Write-Host "  빌드 실패!" -ForegroundColor Red
 	exit $LASTEXITCODE

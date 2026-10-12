@@ -16,7 +16,7 @@
 use super::input::blank;
 use std::time::Instant;
 
-use awscli_rust_clients::zeromq;
+use testrust_clients::zeromq;
 use tracing::info;
 
 use super::{CommandContext, CommandError, CommandResult, not_ported};

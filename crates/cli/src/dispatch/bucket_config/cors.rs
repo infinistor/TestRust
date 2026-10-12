@@ -6,7 +6,7 @@
 //! `<CORSConfiguration>`을 보낸다(SDK가 본문 없는 요청을 만들 수 없다).
 
 use aws_sdk_s3::types::{CorsConfiguration, CorsRule};
-use awscli_rust_common::json::{Deserializer, FromJson, JsonError, Token};
+use testrust_common::json::{Deserializer, FromJson, JsonError, Token};
 
 use super::built;
 use super::jsonutil::{NullableI32, read_list};

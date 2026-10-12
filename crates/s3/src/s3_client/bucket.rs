@@ -12,7 +12,7 @@ use tracing::{error, info};
 use super::{S3Client, S3Error, S3Response};
 
 /// 빈 버킷 이름 대신 쓰는 자리표시 이름(실제 버킷 이름 규칙에 맞는 소문자·숫자·`-`).
-const EMPTY_BUCKET: &str = "awscli-rust-empty-bucket-placeholder";
+const EMPTY_BUCKET: &str = "testrust-empty-bucket-placeholder";
 
 /// 경로 방식 주소 `/자리표시...`에서 자리표시 이름을 지운다(`/?acl`).
 fn strip_empty_bucket(request: &mut aws_sdk_s3::config::http::HttpRequest) {

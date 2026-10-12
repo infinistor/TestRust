@@ -3,8 +3,8 @@
 
 use std::path::Path;
 
-use awscli_rust_config::IniFile;
 use serde_json::{Value, json};
+use testrust_config::IniFile;
 
 const FIXTURES: &[&str] = &[
     "edge-cases",

@@ -1,4 +1,4 @@
-//! .NET `HttpClient`처럼 동작하는 공용 HTTP 전송. KsanClient와 `awscli-rust-clients`의 KHttpClient·CurlClient가
+//! .NET `HttpClient`처럼 동작하는 공용 HTTP 전송. KsanClient와 `testrust-clients`의 KHttpClient·CurlClient가
 //! 함께 쓴다. reqwest처럼 기본 헤더(`accept` 등)를 붙이지 않으려고 hyper를 직접 쓰며, 보내는 헤더는 호출자가
 //! 지정한 것뿐이다.
 //!

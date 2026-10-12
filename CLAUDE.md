@@ -1,4 +1,4 @@
-# awscli-rust
+# TestRust
 
 TESTCore(.NET)를 Rust로 옮긴 프로젝트. `v1.0.0`에서 이식을 마쳤다. 이식 당시 계획과 단계는 [RUST_MIGRATION.md](RUST_MIGRATION.md)(읽기 전용 기록)에 있다.
 
@@ -10,12 +10,12 @@ TESTCore(.NET)를 Rust로 옮긴 프로젝트. `v1.0.0`에서 이식을 마쳤�
 
 ## 호환 원칙
 
--   바이너리 이름은 `awscli-rust`. 그 외 CLI 옵션 이름, `config.ini` 형식, 콘솔 출력, CSV·JSON 결과, Controller·Worker HTTP 계약은 TESTCore와 같아야 한다.
+-   바이너리 이름은 `TestRust`. 그 외 CLI 옵션 이름, `config.ini` 형식, 콘솔 출력, CSV·JSON 결과, Controller·Worker HTTP 계약은 TESTCore와 같아야 한다.
 -   통계 측정 구간(`TimeWatcher`, `UpDownStats`)과 체크섬·서명 결과가 원본과 일치해야 한다.
 
 ## 구조
 
--   cargo workspace. 크레이트는 `crates/<이름>`에 두고 패키지 이름은 `awscli-rust-<이름>`으로 한다.
+-   cargo workspace. 크레이트는 `crates/<이름>`에 두고 패키지 이름은 `testrust-<이름>`으로 한다.
 -   비동기 런타임은 `tokio`, 취소는 `tokio_util::sync::CancellationToken`으로 통일한다.
 -   라이브러리 크레이트의 오류는 `thiserror`, 바이너리는 `anyhow`를 쓴다.
 -   `unsafe`는 쓰지 않는다(`unsafe_code = "deny"`). 예외는 `crates/cli/src/main.rs`의 Linux(musl) 할당기 옵션 설정 한 곳뿐이다.

@@ -1,5 +1,5 @@
 [package]
-name = "awscli-rust-model"
+name = "testrust-model"
 description = "S3·Portal·Mover DTO와 통계 구조체 (TESTCore Data/*)"
 version.workspace = true
 edition.workspace = true
@@ -7,8 +7,8 @@ repository.workspace = true
 publish.workspace = true
 
 [dependencies]
-awscli-rust-common.workspace = true
-awscli-rust-config.workspace = true
+testrust-common.workspace = true
+testrust-config.workspace = true
 rust_decimal.workspace = true
 tokio-util.workspace = true
 serde.workspace = true

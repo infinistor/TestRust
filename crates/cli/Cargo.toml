@@ -1,6 +1,6 @@
 [package]
-name = "awscli-rust-cli"
-description = "awscli-rust 실행 파일: 옵션 파서와 명령 디스패치 (TESTCore Program.cs, Cli/*, Commands/*)"
+name = "testrust-cli"
+description = "TestRust 실행 파일: 옵션 파서와 명령 디스패치 (TESTCore Program.cs, Cli/*, Commands/*)"
 version.workspace = true
 edition.workspace = true
 repository.workspace = true
@@ -11,7 +11,7 @@ build = "build.rs"
 path = "src/lib.rs"
 
 [[bin]]
-name = "awscli-rust"
+name = "TestRust"
 path = "src/main.rs"
 
 [[test]]
@@ -35,13 +35,13 @@ name = "parity_distributed_e2e"
 path = "../../tests/parity/distributed_e2e.rs"
 
 [dependencies]
-awscli-rust-clients.workspace = true
-awscli-rust-common.workspace = true
-awscli-rust-config.workspace = true
-awscli-rust-distributed.workspace = true
-awscli-rust-model.workspace = true
-awscli-rust-s3.workspace = true
-awscli-rust-scenarios.workspace = true
+testrust-clients.workspace = true
+testrust-common.workspace = true
+testrust-config.workspace = true
+testrust-distributed.workspace = true
+testrust-model.workspace = true
+testrust-s3.workspace = true
+testrust-scenarios.workspace = true
 aws-sdk-s3.workspace = true
 serde.workspace = true
 serde_json.workspace = true

@@ -1,4 +1,4 @@
-//! 명령행 실행 비교 하네스. 같은 사례를 `TestCore.exe`(기준 생성)와 `awscli-rust`(비교)로 실행한다.
+//! 명령행 실행 비교 하네스. 같은 사례를 `TestCore.exe`(기준 생성)와 `TestRust`(비교)로 실행한다.
 //!
 //! 사례마다 캡처 서버를 띄우고 임시 작업 디렉터리에 `config.ini`(서버 주소를 넣은 템플릿)와 입력 파일을 만든 뒤
 //! 실행 파일을 자식 프로세스로 돌린다. 표준 출력·표준 오류·종료 코드·서버가 받은 요청을 정규화해 돌려준다.
@@ -238,7 +238,7 @@ impl CliOutcome {
     }
 }
 
-/// 출력 인코딩. TestCore.exe와 awscli-rust 모두 UTF-8로 쓴다(시스템 코드 페이지로 쓰는 프로그램을 비교할 때만 `Cp949`).
+/// 출력 인코딩. TestCore.exe와 TestRust 모두 UTF-8로 쓴다(시스템 코드 페이지로 쓰는 프로그램을 비교할 때만 `Cp949`).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[allow(dead_code)]
 pub enum OutputEncoding {

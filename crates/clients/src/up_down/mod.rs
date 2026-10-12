@@ -15,9 +15,9 @@ mod runs;
 use std::path::PathBuf;
 use std::sync::atomic::{AtomicI32, Ordering};
 
-use awscli_rust_config::{EnumBucketTypes, UpDownClientConfig, UserData, UtilError};
-use awscli_rust_model::{QuitFlag, TestClient, TestStats};
-use awscli_rust_s3::{S3Client, S3Error};
+use testrust_config::{EnumBucketTypes, UpDownClientConfig, UserData, UtilError};
+use testrust_model::{QuitFlag, TestClient, TestStats};
+use testrust_s3::{S3Client, S3Error};
 
 /// 원본 `TAG_KEY_NAME`.
 pub const TAG_KEY_NAME: &str = "TagValue";

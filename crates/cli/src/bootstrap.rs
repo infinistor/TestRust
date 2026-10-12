@@ -1,7 +1,7 @@
 //! TESTCore `Util/ConfigBootstrapper.cs`: 설정 파일을 읽고 명령행 값으로 덮어쓴다.
 
-use awscli_rust_common::to_dotnet_json;
-use awscli_rust_config::{Config, EnumBucketTypes};
+use testrust_common::to_dotnet_json;
+use testrust_config::{Config, EnumBucketTypes};
 use tracing::info;
 
 use crate::options::CommandOptions;

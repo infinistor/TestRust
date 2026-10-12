@@ -1,8 +1,8 @@
 //! "값 없음" 표식. .NET SDK 모델은 값을 안 준 속성을 요청 XML에서 그냥 뺀다. `aws-sdk-s3` 모델은 필수 값이
 //! 비어 있으면 `build()`가 실패하므로, 호출 쪽이 [`UNSET`]을 넣어 만든 뒤 서명 전에 그 요소(또는 속성)를 지운다.
 //!
-//! - 요소: `<Tag>__awscli_rust_unset__</Tag>` 전체를 지운다. 비어 있던 상위 요소는 `<Parent></Parent>`로 남는다.
-//! - 속성: ` xsi:type="__awscli_rust_unset__"`를 지운다.
+//! - 요소: `<Tag>__testrust_unset__</Tag>` 전체를 지운다. 비어 있던 상위 요소는 `<Parent></Parent>`로 남는다.
+//! - 속성: ` xsi:type="__testrust_unset__"`를 지운다.
 //!
 //! 본문을 바꾸면 SDK가 이미 넣은 `Content-Length`와 체크섬 헤더(`Content-MD5`, `x-amz-checksum-crc32`)도 다시 계산한다.
 
@@ -12,7 +12,7 @@ use aws_sdk_s3::primitives::SdkBody;
 use super::{add_content_md5, add_crc32};
 
 /// 값이 없음을 나타내는 표식 문자열(실제 설정 값으로는 나올 수 없다).
-pub const UNSET: &str = "__awscli_rust_unset__";
+pub const UNSET: &str = "__testrust_unset__";
 
 /// 표식이 든 요소·속성을 지운 본문.
 fn strip_text(text: &str) -> String {

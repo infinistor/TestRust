@@ -19,7 +19,7 @@ pub mod error;
 pub mod request;
 pub mod response;
 
-use awscli_rust_config::{PortalConfig, UserData};
+use testrust_config::{PortalConfig, UserData};
 
 pub use data::{
     EnumDiskSizeUnit, EnumResponseResult, EnumVolumePermission, EnumVolumeReplicationType,
@@ -31,7 +31,7 @@ pub use response::{PortalResponse, PortalResponseData, ResponseSystemUser, Respo
 
 use crate::json::FromJson;
 use crate::khttp::{KHttpClient, KHttpError};
-use awscli_rust_common::to_dotnet_json;
+use testrust_common::to_dotnet_json;
 
 const GET_HEALTH_CHECK: &str = "/api/v1/Health";
 const DEFAULT_VOLUME_URL: &str = "/api/v1/Volumes";

@@ -1,7 +1,7 @@
 //! 입력·출력 JSON 모델: `Data/S3/MyLifecycle*.cs`, `MyReplication*.cs`, `MyDeleteMarkerReplication.cs`와
 //! 원본이 `JsonSerializer.Deserialize<T>`로 읽는 SDK 모델(`Tagging`, `PublicAccessBlockConfiguration`).
 //!
-//! 읽기는 `awscli_rust_common::json`(System.Text.Json 규칙, `JsonException` 메시지 포함)을 쓴다.
+//! 읽기는 `testrust_common::json`(System.Text.Json 규칙, `JsonException` 메시지 포함)을 쓴다.
 //! 속성 이름은 대소문자를 구분하고 모르는 속성은 건너뛴다. `int?`·`bool?`·`DateTime?` 속성의 변환 오류는
 //! .NET처럼 `System.Nullable`1[...]` 형식 이름으로 보고한다.
 
@@ -12,9 +12,9 @@ use aws_sdk_s3::types::{
     NoncurrentVersionExpiration, PublicAccessBlockConfiguration, ReplicationConfiguration,
     ReplicationRule, ReplicationRuleStatus, StorageClass, Tag,
 };
-use awscli_rust_common::DotnetDateTime;
-use awscli_rust_common::json::{Deserializer, FromJson, JsonError, Token};
 use serde::Serialize;
+use testrust_common::DotnetDateTime;
+use testrust_common::json::{Deserializer, FromJson, JsonError, Token};
 
 use crate::dispatch::CommandError;
 
@@ -65,7 +65,7 @@ fn blank(value: &Option<String>) -> String {
 fn required(value: &Option<String>) -> String {
     value
         .clone()
-        .unwrap_or_else(|| awscli_rust_s3::UNSET.to_string())
+        .unwrap_or_else(|| testrust_s3::UNSET.to_string())
 }
 
 // ---------------------------------------------------------------------------------------------

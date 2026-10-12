@@ -293,7 +293,7 @@ impl Config {
 
     /// `Config.ToString()`: 들여쓰기가 적용된 JSON.
     pub fn to_json_string(&self) -> String {
-        awscli_rust_common::to_dotnet_json(self)
+        testrust_common::to_dotnet_json(self)
     }
 }
 

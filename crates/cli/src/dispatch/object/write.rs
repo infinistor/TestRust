@@ -4,11 +4,11 @@
 use std::time::Instant;
 
 use aws_sdk_s3::types::{ChecksumAlgorithm, Tag};
-use awscli_rust_common::dotnet_http::status_name;
-use awscli_rust_s3::S3Error;
-use awscli_rust_s3::ksan::KsanClient;
-use awscli_rust_s3::s3_client::PutBody;
-use awscli_rust_s3::s3_client::PutObjectRequest;
+use testrust_common::dotnet_http::status_name;
+use testrust_s3::S3Error;
+use testrust_s3::ksan::KsanClient;
+use testrust_s3::s3_client::PutBody;
+use testrust_s3::s3_client::PutObjectRequest;
 use tracing::{error, info};
 
 use super::input::{KeyVersionList, parse};
@@ -16,7 +16,7 @@ use super::{S3Result, blank, bucket_name, key_name};
 use crate::dispatch::output::print_json;
 use crate::dispatch::{CommandContext, CommandError, CommandResult};
 use crate::usage;
-use awscli_rust_scenarios::files::{
+use testrust_scenarios::files::{
     file_exists, file_list, file_md5_base64, read_all_text, string_md5_base64,
 };
 
@@ -222,7 +222,7 @@ pub(super) async fn put_object(ctx: &CommandContext) -> CommandResult {
     }
 
     request.use_chunk_encoding = o.checksum;
-    if o.checksum_type != awscli_rust_s3::ChecksumAlgorithm::None {
+    if o.checksum_type != testrust_s3::ChecksumAlgorithm::None {
         request.checksum_algorithm = Some(ChecksumAlgorithm::from(o.checksum_type.name()));
     }
 
@@ -292,7 +292,7 @@ pub(super) async fn storage_move(ctx: &CommandContext) -> CommandResult {
     Ok(0)
 }
 
-fn ksan_error(error: awscli_rust_s3::ksan::KsanError) -> CommandError {
+fn ksan_error(error: testrust_s3::ksan::KsanError) -> CommandError {
     CommandError::new(error.dotnet_type(), error.to_string())
 }
 

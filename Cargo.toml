@@ -5,17 +5,17 @@ members = ["crates/*"]
 [workspace.package]
 version = "0.1.0"
 edition = "2024"
-repository = "https://github.com/infinistor/awscli-rust"
+repository = "https://github.com/infinistor/TestRust"
 publish = false
 
 [workspace.dependencies]
-awscli-rust-common = { path = "crates/common" }
-awscli-rust-config = { path = "crates/config" }
-awscli-rust-model = { path = "crates/model" }
-awscli-rust-s3 = { path = "crates/s3" }
-awscli-rust-clients = { path = "crates/clients" }
-awscli-rust-scenarios = { path = "crates/scenarios" }
-awscli-rust-distributed = { path = "crates/distributed" }
+testrust-common = { path = "crates/common" }
+testrust-config = { path = "crates/config" }
+testrust-model = { path = "crates/model" }
+testrust-s3 = { path = "crates/s3" }
+testrust-clients = { path = "crates/clients" }
+testrust-scenarios = { path = "crates/scenarios" }
+testrust-distributed = { path = "crates/distributed" }
 
 anyhow = "1"
 thiserror = "2"

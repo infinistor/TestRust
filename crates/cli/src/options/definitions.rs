@@ -1,7 +1,7 @@
 //! TESTCore `Cli/CliOptionParser.cs`의 옵션 표. 선언 순서(도움말 순서)와 설명 문구를 원본 그대로 둔다.
 
-use awscli_rust_config::EnumBucketTypes;
-use awscli_rust_s3::ChecksumAlgorithm;
+use testrust_config::EnumBucketTypes;
+use testrust_s3::ChecksumAlgorithm;
 
 use super::convert::long_parse_exception;
 use super::{CommandOptions, ParseError};
@@ -49,8 +49,8 @@ const fn opt(prototype: &'static str, description: &'static str, action: Action)
 /// 원본 `Utility.SizeToLong`. 실패하면 원본처럼 처리하지 않은 예외가 된다.
 fn size_to_long(value: Option<&str>) -> Result<i64, ParseError> {
     let Some(value) = value else { return Ok(0) };
-    awscli_rust_config::util::size_to_long(value).map_err(|e| match e {
-        awscli_rust_config::UtilError::InvalidNumber(input) => {
+    testrust_config::util::size_to_long(value).map_err(|e| match e {
+        testrust_config::UtilError::InvalidNumber(input) => {
             let (dotnet_type, message) = long_parse_exception(&input);
             ParseError::Unhandled {
                 dotnet_type,

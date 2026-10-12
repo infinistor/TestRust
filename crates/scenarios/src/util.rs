@@ -1,7 +1,7 @@
 //! 원본 `Util/Utility.cs` 중 시나리오가 쓰는 것(다른 크레이트에 없는 것만).
 //!
-//! 이미 옮긴 것: `CreateRandomFile`·`GetETag(path)`·`GetMD5` → `awscli_rust_clients::file_util`,
-//! `RandomTextLong` → `awscli_rust_config::util::random_text_long`, `GetFileSizeUint` → `awscli_rust_model::units`,
+//! 이미 옮긴 것: `CreateRandomFile`·`GetETag(path)`·`GetMD5` → `testrust_clients::file_util`,
+//! `RandomTextLong` → `testrust_config::util::random_text_long`, `GetFileSizeUint` → `testrust_model::units`,
 //! `GetFileList`·`SaveFile` → [`crate::files`].
 //!
 //! 원본 `S3Client`는 `GetAwaiter().GetResult()`로 기다려 예외를 그대로 던진다. 그래서 원본 곳곳의
@@ -9,9 +9,9 @@
 
 use std::path::Path;
 
-use awscli_rust_s3::S3Client;
 use md5::{Digest, Md5};
 use rand::Rng;
+use testrust_s3::S3Client;
 use tracing::error;
 
 use crate::ScenarioError;
@@ -101,7 +101,7 @@ pub fn compare_dir_md5(source: &str, target: &str) -> Result<bool, ScenarioError
 /// 원본 `GetETag(fileName)`: 파일 MD5의 소문자 16진수. 파일이 없으면 `FileNotFoundException`.
 pub fn file_etag(path: &str) -> Result<String, ScenarioError> {
     let full = crate::input::full_path_of(path);
-    awscli_rust_clients::file_util::file_etag(Path::new(&full))
+    testrust_clients::file_util::file_etag(Path::new(&full))
         .map_err(|e| crate::input::io_error(&full, &e))
 }
 

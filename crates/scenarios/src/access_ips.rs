@@ -15,12 +15,12 @@
 //! - `S3URL`이 비어 있고 테스트 목록이 있으면 `TestBucket`의 `mainClients[0]`에서 `ArgumentOutOfRangeException`이 난다.
 //! - 테스트 목록의 주소는 앞뒤 공백을 자르지 않는다(`Split(',')`한 첫 조각 그대로). `bool.Parse`만 공백을 무시한다.
 
-use awscli_rust_clients::portal::{EnumVolumeStatus, PortalError, PortalManager};
-use awscli_rust_config::{AccessIpsConfig, PortalConfig, UserData};
-use awscli_rust_s3::S3Client;
+use testrust_clients::portal::{EnumVolumeStatus, PortalError, PortalManager};
+use testrust_config::{AccessIpsConfig, PortalConfig, UserData};
+use testrust_s3::S3Client;
 use tracing::{error, info};
 
-use awscli_rust_common::dotnet_format::bool_text as dotnet_bool;
+use testrust_common::dotnet_format::bool_text as dotnet_bool;
 
 use crate::ScenarioError;
 use crate::input::{null_reference, read_all_text};

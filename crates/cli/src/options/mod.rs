@@ -5,8 +5,8 @@ mod definitions;
 mod help;
 mod parser;
 
-use awscli_rust_config::EnumBucketTypes;
-use awscli_rust_s3::ChecksumAlgorithm;
+use testrust_config::EnumBucketTypes;
+use testrust_s3::ChecksumAlgorithm;
 
 use crate::menu::MenuList;
 

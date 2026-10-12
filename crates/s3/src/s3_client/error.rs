@@ -3,7 +3,7 @@
 use std::fmt;
 
 use aws_sdk_s3::error::{ProvideErrorMetadata, SdkError};
-use awscli_rust_common::dotnet_http::status_name;
+use testrust_common::dotnet_http::status_name;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum S3Error {
@@ -254,7 +254,7 @@ mod tests {
 
     #[test]
     fn io_error_types() {
-        let missing = std::env::temp_dir().join("awscli-rust-missing-file.bin");
+        let missing = std::env::temp_dir().join("testrust-missing-file.bin");
         let error = std::io::Error::from(std::io::ErrorKind::NotFound);
         let mapped = S3Error::io(&missing, &error);
         assert_eq!(mapped.dotnet_type(), "System.IO.FileNotFoundException");
@@ -262,7 +262,7 @@ mod tests {
             mapped.to_string(),
             format!("Could not find file '{}'.", missing.display())
         );
-        let deep = std::env::temp_dir().join("awscli-rust-missing-dir/x.bin");
+        let deep = std::env::temp_dir().join("testrust-missing-dir/x.bin");
         assert_eq!(
             S3Error::io(&deep, &error).dotnet_type(),
             "System.IO.DirectoryNotFoundException"

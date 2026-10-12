@@ -1,7 +1,7 @@
 //! TESTCore `Util/Utility.cs`의 크기 표시 함수(`GetFileSizeUint`, `GetFileSizeUintSimple`).
 
-use awscli_rust_common::dotnet_format::{fixed, fixed_aligned};
 use rust_decimal::Decimal;
+use testrust_common::dotnet_format::{fixed, fixed_aligned};
 
 const SI_UNITS: [&str; 9] = ["Byte", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 const IEC_UNITS: [&str; 9] = [

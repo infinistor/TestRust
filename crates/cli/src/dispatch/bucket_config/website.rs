@@ -12,8 +12,8 @@ use aws_sdk_s3::types::{
     Condition, ErrorDocument, IndexDocument, Protocol, Redirect, RedirectAllRequestsTo,
     RoutingRule, WebsiteConfiguration,
 };
-use awscli_rust_common::json::{Deserializer, FromJson, JsonError, Token};
-use awscli_rust_s3::UNSET;
+use testrust_common::json::{Deserializer, FromJson, JsonError, Token};
+use testrust_s3::UNSET;
 
 use super::built;
 use super::jsonutil::read_list;

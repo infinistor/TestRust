@@ -2,7 +2,7 @@
 
 use std::fmt;
 
-use awscli_rust_s3::S3Error;
+use testrust_s3::S3Error;
 
 /// 원본에서 던져진 .NET 예외. 최상위(`app.rs`)의 `catch (Exception e) { _log.Error(e); return ERROR_NORMAL; }`로 가거나,
 /// 스레드 안에서 나면 [`crate::crash`]로 프로세스를 끝낸다.
@@ -52,16 +52,16 @@ impl From<S3Error> for ScenarioError {
 }
 
 /// KSAN 확장 API 오류: `catch (Exception e)`가 남기는 `형식: 메시지`.
-impl From<awscli_rust_s3::ksan::KsanError> for ScenarioError {
-    fn from(error: awscli_rust_s3::ksan::KsanError) -> Self {
+impl From<testrust_s3::ksan::KsanError> for ScenarioError {
+    fn from(error: testrust_s3::ksan::KsanError) -> Self {
         Self::new(error.dotnet_type(), error.to_string())
     }
 }
 
 /// 이름 생성 등 도우미 오류를 원본 .NET 예외로.
-impl From<awscli_rust_config::UtilError> for ScenarioError {
-    fn from(error: awscli_rust_config::UtilError) -> Self {
-        use awscli_rust_config::UtilError::*;
+impl From<testrust_config::UtilError> for ScenarioError {
+    fn from(error: testrust_config::UtilError) -> Self {
+        use testrust_config::UtilError::*;
         match error {
             InvalidNumber(value) => Self::new(
                 "System.FormatException",
@@ -94,9 +94,9 @@ impl From<std::io::Error> for ScenarioError {
 }
 
 /// UpDownClient 메서드 밖으로 나가던 예외.
-impl From<awscli_rust_clients::UpDownError> for ScenarioError {
-    fn from(error: awscli_rust_clients::UpDownError) -> Self {
-        use awscli_rust_clients::UpDownError::*;
+impl From<testrust_clients::UpDownError> for ScenarioError {
+    fn from(error: testrust_clients::UpDownError) -> Self {
+        use testrust_clients::UpDownError::*;
         let message = error.to_string();
         match error {
             S3(e) => e.into(),
@@ -116,26 +116,26 @@ impl From<awscli_rust_clients::UpDownError> for ScenarioError {
 }
 
 /// Portal 호출 실패(`PortalXxxException`, HTTP·JSON 오류).
-impl From<awscli_rust_clients::portal::PortalError> for ScenarioError {
-    fn from(error: awscli_rust_clients::portal::PortalError) -> Self {
+impl From<testrust_clients::portal::PortalError> for ScenarioError {
+    fn from(error: testrust_clients::portal::PortalError) -> Self {
         Self::new(error.dotnet_type(), error.to_string())
     }
 }
 
-impl From<awscli_rust_clients::LocalError> for ScenarioError {
-    fn from(error: awscli_rust_clients::LocalError) -> Self {
+impl From<testrust_clients::LocalError> for ScenarioError {
+    fn from(error: testrust_clients::LocalError) -> Self {
         match error {
-            awscli_rust_clients::LocalError::Util(e) => e.into(),
-            awscli_rust_clients::LocalError::Io(e) => e.into(),
+            testrust_clients::LocalError::Util(e) => e.into(),
+            testrust_clients::LocalError::Io(e) => e.into(),
         }
     }
 }
 
-impl From<awscli_rust_clients::MultiSystemError> for ScenarioError {
-    fn from(error: awscli_rust_clients::MultiSystemError) -> Self {
+impl From<testrust_clients::MultiSystemError> for ScenarioError {
+    fn from(error: testrust_clients::MultiSystemError) -> Self {
         match error {
-            awscli_rust_clients::MultiSystemError::Util(e) => e.into(),
-            awscli_rust_clients::MultiSystemError::Io(e) => e.into(),
+            testrust_clients::MultiSystemError::Util(e) => e.into(),
+            testrust_clients::MultiSystemError::Io(e) => e.into(),
         }
     }
 }

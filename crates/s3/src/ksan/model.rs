@@ -4,8 +4,8 @@
 //! 모르는 요소는 무시하며, 같은 요소가 여러 번 나오면 마지막 값을 쓴다. JSON 출력(`ToString()`)은
 //! 원본 속성 순서와 이름을 따른다.
 
-use awscli_rust_common::DotnetDateTime;
 use serde::Serialize;
+use testrust_common::DotnetDateTime;
 
 use crate::xml_doc::{self, Element, XmlError};
 

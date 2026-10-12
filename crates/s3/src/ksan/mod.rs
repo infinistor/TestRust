@@ -15,11 +15,11 @@
 pub mod error;
 pub mod model;
 
-use awscli_rust_config::UserData;
 use bytes::Bytes;
 use chrono::Utc;
 use http::Method;
 use sha2::{Digest, Sha256};
+use testrust_config::UserData;
 
 pub use error::KsanError;
 pub use model::{

@@ -13,16 +13,16 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
-use awscli_rust_common::{DotnetDateTime, DotnetDateTimeOffset};
-use awscli_rust_config::Config;
-use awscli_rust_distributed::console::{self, FormatOptions};
-use awscli_rust_distributed::contracts::{RunOptions, RunResult, RunSnapshot, WorkloadSettings};
-use awscli_rust_distributed::controller::{run_async, run_with_cleanup_budget};
-use awscli_rust_distributed::result_writer::{ResultSettings, ResultWriter, WorkerSample};
-use awscli_rust_distributed::settings::DistributedSettings;
-use awscli_rust_distributed::{DistributedArgs, run};
 use fake_driver::{Behavior, FakeDriver};
 use serde_json::Value;
+use testrust_common::{DotnetDateTime, DotnetDateTimeOffset};
+use testrust_config::Config;
+use testrust_distributed::console::{self, FormatOptions};
+use testrust_distributed::contracts::{RunOptions, RunResult, RunSnapshot, WorkloadSettings};
+use testrust_distributed::controller::{run_async, run_with_cleanup_budget};
+use testrust_distributed::result_writer::{ResultSettings, ResultWriter, WorkerSample};
+use testrust_distributed::settings::DistributedSettings;
+use testrust_distributed::{DistributedArgs, run};
 use tokio_util::sync::CancellationToken;
 use tracing_subscriber::layer::SubscriberExt;
 

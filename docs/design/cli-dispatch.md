@@ -38,12 +38,12 @@ TESTCore `Util/TestCoreApplication.cs`, `Util/ConfigBootstrapper.cs`, `Commands/
 -   도움말 문자열은 `usage::main_flag`/`sub_flag`/`optional`/`optional_value`로 원본과 같은 순서로 만든다. `perl tools/dispatcher-cases.pl <시작 줄> <끝 줄>`이 C# 식을 Rust 식으로 바꿔 준다.
 -   도움말의 예제 JSON(`JsonSerializer.Serialize(example, jsonOptions)`)은 .NET 출력(`baseline/cli-run/help.json`)을 문자열 상수로 그대로 쓴다.
 -   SDK 응답 JSON 덤프(`if (print) Console.WriteLine(JsonSerializer.Serialize(response.X, jsonOptions))`)는 `output::print_json(&x)`. .NET과 글자 단위로 맞추지 않는다(사용자 결정). 이런 사례는 `"dump": true`.
--   응답 상태 비교(`response.HttpStatusCode == HttpStatusCode.OK`)는 `response.status == 200`. 실패 로그의 상태 이름은 `awscli_rust_common::dotnet_http::status_name`.
+-   응답 상태 비교(`response.HttpStatusCode == HttpStatusCode.OK`)는 `response.status == 200`. 실패 로그의 상태 이름은 `testrust_common::dotnet_http::status_name`.
 -   S3 예외는 `?`로 `CommandError`가 된다. 최상위가 `ERROR` 로그(`형식: 메시지`)를 남기고 -1로 끝낸다(`Main complete time` 없음). 그 밖의 .NET 예외는 `CommandError::new(".NET 형식", "메시지")`.
--   입력 JSON 파일(`JsonSerializer.Deserialize<T>`)은 `awscli_rust_common::json`의 `FromJson`(System.Text.Json 읽기 규칙, `JsonException` 메시지 포함)으로 읽는다.
+-   입력 JSON 파일(`JsonSerializer.Deserialize<T>`)은 `testrust_common::json`의 `FromJson`(System.Text.Json 읽기 규칙, `JsonException` 메시지 포함)으로 읽는다.
 -   날짜: `ToString("yyyy-MM-dd HH:mm:ss", InvariantInfo)`는 `output::invariant_time`, 기본 `ToString()`은 ko-KR 형식 `output::ko_kr_time`(사용자 결정). .NET SDK v4는 응답 시각을 UTC로 읽으므로 둘 다 UTC로 쓴다.
 -   S3 오류의 예외 형식: `?`(`From<S3Error>`)는 서비스 오류를 모두 `AmazonS3Exception`으로 만든다. 연산이 전용 예외로 모델링한 코드가 있으면 `CommandError::s3(e, &["NoSuchKey"])`.
--   SDK 모델이 필수로 요구하지만 .NET은 생략하는 값은 `awscli_rust_s3::UNSET`을 넣는다. S3 클라이언트가 서명 전에 그 요소·속성을 지운다(`mutate = strip_unset`).
+-   SDK 모델이 필수로 요구하지만 .NET은 생략하는 값은 `testrust_s3::UNSET`을 넣는다. S3 클라이언트가 서명 전에 그 요소·속성을 지운다(`mutate = strip_unset`).
 -   공용 입력 처리(`IsNullOrWhiteSpace`, `File.ReadAllText`, 파일 예외, `NullReferenceException`)는 `dispatch::input`.
 -   원본 버그는 고치지 않는다. 모듈 문서 주석에 적는다.
 
@@ -87,8 +87,8 @@ TESTCore `Util/TestCoreApplication.cs`, `Util/ConfigBootstrapper.cs`, `Commands/
 ```powershell
 $env:TESTCORE_BIN = pwsh tools/dotnet-oracle/build-testcore.ps1 | Select-Object -Last 1
 $env:CLI_RUN_FILTER = "bucket/"   # 내 모듈 사례만 (자동 사례 묶음은 건드리지 않는다)
-cargo test -p awscli-rust-cli --test parity_cli_run -- --ignored generate
-cargo test -p awscli-rust-cli --test parity_cli_run
+cargo test -p testrust-cli --test parity_cli_run -- --ignored generate
+cargo test -p testrust-cli --test parity_cli_run
 ```
 
 원본 디스패처의 `case`는 모두 옮겼다. `PORTED`에 없는 메뉴는 원본에도 `case`가 없는 것(`ReplicationTest`, `GetTestAll`, `AccessKey`·`SecretKey`·`URL`·`MaxCount`)뿐이다. `dispatch::is_ported`가 `false`인 메뉴의 사례는 비교하지 않으므로, 메뉴를 새로 추가하면 해당 모듈의 `PORTED`에도 넣는다.

@@ -22,8 +22,8 @@ use std::path::Path;
 use std::time::Instant;
 
 use aws_sdk_s3::types::ObjectCannedAcl;
-use awscli_rust_common::dotnet_http::status_name;
-use awscli_rust_common::json::{ReadOptions, deserialize};
+use testrust_common::dotnet_http::status_name;
+use testrust_common::json::{ReadOptions, deserialize};
 use tracing::{error, info};
 
 use super::bucket::{constant, format};
@@ -128,7 +128,7 @@ fn help_text(menu: MenuList) -> Option<String> {
 }
 
 /// 객체 ACL 연산에서 .NET SDK가 전용 예외로 던지는 오류 코드.
-fn object_model(error: awscli_rust_s3::S3Error) -> CommandError {
+fn object_model(error: testrust_s3::S3Error) -> CommandError {
     CommandError::s3(error, &["NoSuchKey"])
 }
 

@@ -12,11 +12,11 @@ mod route_server;
 
 use std::sync::{Arc, Mutex, OnceLock};
 
-use awscli_rust_clients::UpDownClient;
-use awscli_rust_config::{EnumBucketTypes, UpDownClientConfig, UserData};
-use awscli_rust_model::TestClient;
 use route_server::{Hook, RouteServer, routes};
 use serde_json::Value;
+use testrust_clients::UpDownClient;
+use testrust_config::{EnumBucketTypes, UpDownClientConfig, UserData};
+use testrust_model::TestClient;
 use tracing::field::{Field, Visit};
 use tracing::{Event, Level, Subscriber};
 use tracing_subscriber::Layer;

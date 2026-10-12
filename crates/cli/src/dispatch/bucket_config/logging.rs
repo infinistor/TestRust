@@ -14,8 +14,8 @@ use aws_sdk_s3::types::{
     BucketLoggingStatus, Grantee, LoggingEnabled, PartitionDateSource as SdkPartitionDateSource,
     PartitionedPrefix, SimplePrefix, TargetGrant, TargetObjectKeyFormat, Type,
 };
-use awscli_rust_common::json::{Deserializer, FromJson, JsonError, Token};
-use awscli_rust_s3::UNSET;
+use testrust_common::json::{Deserializer, FromJson, JsonError, Token};
+use testrust_s3::UNSET;
 
 use super::jsonutil::{ConstantValue, PartitionDateSource, S3Permission, read_list};
 use super::{CommandError, built};

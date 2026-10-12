@@ -5,7 +5,7 @@
 //! 여기서는 같은 일을 tokio 작업으로 한다.
 //!
 //! - 시작 전 작업은 만들어만 두고([`TestTasks::add`]) [`TestTasks::start`]에서 띄운다(원본 `new Thread` → `Start`).
-//! - 스레드 안에서 처리하지 않은 예외(`Err`)는 원본처럼 프로세스를 끝낸다([`awscli_rust_common::dotnet_exit::crash`]).
+//! - 스레드 안에서 처리하지 않은 예외(`Err`)는 원본처럼 프로세스를 끝낸다([`testrust_common::dotnet_exit::crash`]).
 //!   최종 출력과 JSON 저장은 하지 않는다.
 //! - 동기 클라이언트(LocalClient)는 [`TestTasks::add_blocking`]으로 블로킹 스레드에서 돌린다.
 
@@ -14,11 +14,11 @@ use std::pin::Pin;
 use std::sync::Arc;
 use std::time::Duration;
 
-use awscli_rust_clients::local::LocalClient;
-use awscli_rust_clients::multi_system::MultiSystemClient;
-use awscli_rust_clients::up_down::UpDownClient;
-use awscli_rust_common::dotnet_exit::crash;
-use awscli_rust_model::TestClient;
+use testrust_clients::local::LocalClient;
+use testrust_clients::multi_system::MultiSystemClient;
+use testrust_clients::up_down::UpDownClient;
+use testrust_common::dotnet_exit::crash;
+use testrust_model::TestClient;
 use tokio::task::JoinHandle;
 
 use crate::ScenarioError;

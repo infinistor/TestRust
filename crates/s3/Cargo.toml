@@ -1,5 +1,5 @@
 [package]
-name = "awscli-rust-s3"
+name = "testrust-s3"
 description = "AWS4 서명, 체크섬, S3Client·KHttpClient·KsanClient (TESTCore Signers/*, Client/*)"
 version.workspace = true
 edition.workspace = true
@@ -7,8 +7,8 @@ repository.workspace = true
 publish.workspace = true
 
 [dependencies]
-awscli-rust-common.workspace = true
-awscli-rust-config.workspace = true
+testrust-common.workspace = true
+testrust-config.workspace = true
 aws-sdk-s3.workspace = true
 base64.workspace = true
 bytes.workspace = true

@@ -1,7 +1,7 @@
 //! 원본 `CommandDispatcher` 중 테스트 시나리오 메뉴(`Test/*` 클래스 호출).
 //!
 //! 도움말과 실행 전 검증(설정 누락, 필수 인자)은 여기서, 시나리오 실행은 묶음별 하위 모듈(`up_down`, `system`,
-//! `compare`, `transfer`)에서 한다. 시나리오 본체는 `awscli-rust-scenarios`에 있다.
+//! `compare`, `transfer`)에서 한다. 시나리오 본체는 `testrust-scenarios`에 있다.
 //! 원본 `MixV2Test`는 `--help`여도 도움말을 출력한 뒤 테스트를 실행한다(원본 버그, 그대로 둔다). 버킷 이름이 빈 채로
 //! 실행되는 `--test-mix-v2 --help`(자동 사례 `help/test-mix-v2`)는 .NET처럼 `GET /?acl`을 보낸다(`S3Client::does_s3_bucket_exist`).
 

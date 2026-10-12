@@ -7,11 +7,11 @@
 use std::path::{Path, PathBuf};
 use std::sync::LazyLock;
 
-use awscli_rust_config::{IniFile, UserData};
-use awscli_rust_s3::S3Error;
-use awscli_rust_s3::s3_client::error::full_path;
-use awscli_rust_scenarios::ScenarioError;
 use regex::Regex;
+use testrust_config::{IniFile, UserData};
+use testrust_s3::S3Error;
+use testrust_s3::s3_client::error::full_path;
+use testrust_scenarios::ScenarioError;
 
 use crate::contracts::validate_user;
 

@@ -35,10 +35,10 @@ use std::path::Path;
 use std::time::Instant;
 
 use aws_sdk_s3::types::BucketLifecycleConfiguration;
-use awscli_rust_common::dotnet_http::status_name;
-use awscli_rust_common::json::{FromJson, ReadOptions, deserialize};
-use awscli_rust_common::to_dotnet_json;
-use awscli_rust_s3::{S3Error, S3Response};
+use testrust_common::dotnet_http::status_name;
+use testrust_common::json::{FromJson, ReadOptions, deserialize};
+use testrust_common::to_dotnet_json;
+use testrust_s3::{S3Error, S3Response};
 use tracing::{error, info};
 
 use self::dto::{

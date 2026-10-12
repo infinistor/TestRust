@@ -2,9 +2,9 @@
 
 use std::time::Instant;
 
-use awscli_rust_distributed::DistributedArgs;
-use awscli_rust_distributed::contracts::RunOptions;
-use awscli_rust_s3::{ChecksumAlgorithm, S3Client};
+use testrust_distributed::DistributedArgs;
+use testrust_distributed::contracts::RunOptions;
+use testrust_s3::{ChecksumAlgorithm, S3Client};
 use tracing::{error, info};
 
 use crate::bootstrap;
@@ -17,7 +17,7 @@ use crate::version::version_info;
 pub const ERROR_NORMAL: i32 = -1;
 /// 원본 `ERROR_COMMAND_NOT_FOUND`.
 pub const ERROR_COMMAND_NOT_FOUND: i32 = -127;
-use awscli_rust_common::dotnet_exit::unhandled;
+use testrust_common::dotnet_exit::unhandled;
 
 /// 원본 `Distributed.DistributedApplication.RunAsync(commandOptions)`와 그 예외 처리
 /// (`분산 실행 오류: {메시지}`, 종료 코드 -1).
@@ -52,7 +52,7 @@ fn run_distributed(mut options: CommandOptions) -> i32 {
         .enable_all()
         .build()
         .expect("tokio 런타임");
-    let result = runtime.block_on(awscli_rust_distributed::run(args, || {
+    let result = runtime.block_on(testrust_distributed::run(args, || {
         if !options.worker {
             options.debug = false;
         }

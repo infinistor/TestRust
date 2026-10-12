@@ -2,10 +2,10 @@
 
 use std::path::Path;
 
-use awscli_rust_cli::options::{OPTIONS, option_names, write_option_descriptions};
-use awscli_rust_cli::usage;
-use awscli_rust_common::dotnet_json::NEW_LINE;
 use serde_json::Value;
+use testrust_cli::options::{OPTIONS, option_names, write_option_descriptions};
+use testrust_cli::usage;
+use testrust_common::dotnet_json::NEW_LINE;
 
 fn baseline(name: &str) -> String {
     let path = Path::new(env!("CARGO_MANIFEST_DIR"))

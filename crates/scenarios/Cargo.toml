@@ -1,5 +1,5 @@
 [package]
-name = "awscli-rust-scenarios"
+name = "testrust-scenarios"
 description = "부하·기능 테스트 시나리오 (TESTCore Test/*)"
 version.workspace = true
 edition.workspace = true
@@ -7,11 +7,11 @@ repository.workspace = true
 publish.workspace = true
 
 [dependencies]
-awscli-rust-clients.workspace = true
-awscli-rust-common.workspace = true
-awscli-rust-config.workspace = true
-awscli-rust-model.workspace = true
-awscli-rust-s3.workspace = true
+testrust-clients.workspace = true
+testrust-common.workspace = true
+testrust-config.workspace = true
+testrust-model.workspace = true
+testrust-s3.workspace = true
 aws-sdk-s3.workspace = true
 base64.workspace = true
 chrono.workspace = true

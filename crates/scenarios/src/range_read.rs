@@ -7,16 +7,16 @@
 //! - 응답 본문은 버리지 않고 메모리로 모두 읽는다(`Utility.GetBodySplit`).
 //!
 //! 원본은 일반 `Thread`를 쓰므로 스레드 안에서 처리하지 않은 예외(S3 오류 등)가 나면 프로세스가 비정상 종료한다.
-//! 여기서도 작업의 오류를 [`awscli_rust_common::dotnet_exit::crash`]로 처리한다(최종 출력 없음).
+//! 여기서도 작업의 오류를 [`testrust_common::dotnet_exit::crash`]로 처리한다(최종 출력 없음).
 //! 첫 `HeadObject`의 오류는 호출한 쪽(디스패처)으로 올라간다.
 //!
 //! 원본 특이점(그대로 둔다)
 //!
 //! - 크기가 0 이하인 항목만 있는 `rangeList`는 `offset`이 늘지 않아 끝나지 않는다. 음수 크기는 `offset`을 되돌린다.
 
-use awscli_rust_common::dotnet_exit::crash;
-use awscli_rust_s3::S3Client;
 use rand::Rng;
+use testrust_common::dotnet_exit::crash;
+use testrust_s3::S3Client;
 
 use crate::ScenarioError;
 use crate::files::read_error;

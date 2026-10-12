@@ -1,10 +1,10 @@
 //! 원본 `CommandDispatcher`의 시나리오 실행: LocalTest, MultiSystemTest, AccessIpsTest, UsedSizeTest.
 
-use awscli_rust_common::to_dotnet_json;
-use awscli_rust_scenarios::access_ips::AccessIpsTest;
-use awscli_rust_scenarios::local::LocalTest;
-use awscli_rust_scenarios::multi_system::MultiSystemTest;
-use awscli_rust_scenarios::used_size::UsedSizeTest;
+use testrust_common::to_dotnet_json;
+use testrust_scenarios::access_ips::AccessIpsTest;
+use testrust_scenarios::local::LocalTest;
+use testrust_scenarios::multi_system::MultiSystemTest;
+use testrust_scenarios::used_size::UsedSizeTest;
 
 use super::super::{CommandContext, CommandResult, not_ported};
 use crate::menu::MenuList;

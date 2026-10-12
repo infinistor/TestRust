@@ -24,7 +24,7 @@ pub use crate::input::read_all_text;
 /// `Utility.GetMD5(fileName)`: 파일 MD5의 Base64. 파일이 없으면 `FileNotFoundException`.
 pub fn file_md5_base64(path: &str) -> Result<String, ScenarioError> {
     let full = full_path(path);
-    awscli_rust_clients::file_util::file_md5_base64(&full).map_err(|e| io_error(&full, &e))
+    testrust_clients::file_util::file_md5_base64(&full).map_err(|e| io_error(&full, &e))
 }
 
 /// `Utility.GetMD5FromString(content)`: UTF-8 바이트 MD5의 Base64.

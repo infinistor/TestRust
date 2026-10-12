@@ -31,7 +31,7 @@ use aws_sdk_s3::config::timeout::TimeoutConfig;
 use aws_sdk_s3::config::{
     BehaviorVersion, Credentials, Region, RequestChecksumCalculation, ResponseChecksumValidation,
 };
-use awscli_rust_config::UserData;
+use testrust_config::UserData;
 
 pub use error::S3Error;
 use interceptors::{AdminHeaders, NormalizeHttpDates, StripOperationId, TrimKeySlash};

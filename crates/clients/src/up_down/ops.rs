@@ -5,9 +5,9 @@ use std::path::Path;
 
 use aws_sdk_s3::operation::list_objects::ListObjectsOutput;
 use aws_sdk_s3::types::Tag;
-use awscli_rust_common::dotnet_http::status_name;
-use awscli_rust_s3::s3_client::{PartETag, PutBody};
-use awscli_rust_s3::{S3Client, S3Error};
+use testrust_common::dotnet_http::status_name;
+use testrust_s3::s3_client::{PartETag, PutBody};
+use testrust_s3::{S3Client, S3Error};
 use tracing::error;
 
 use super::UpDownClient;
@@ -287,7 +287,7 @@ pub async fn list_objects(
             bucket,
             prefix,
             marker,
-            awscli_rust_s3::s3_client::S3_MAX_KEYS,
+            testrust_s3::s3_client::S3_MAX_KEYS,
             delimiter,
         )
         .await

@@ -4,7 +4,7 @@
 //! `S3Grantee.Type`은 읽지 않는다(예제 JSON에 있지만 값은 무시되고 아래 규칙으로 정해진다).
 
 use aws_sdk_s3::types::{AccessControlPolicy, Grant, Grantee, Owner, Permission, Type};
-use awscli_rust_common::json::{Deserializer, FromJson, JsonError, Token};
+use testrust_common::json::{Deserializer, FromJson, JsonError, Token};
 
 use crate::dispatch::CommandError;
 use crate::dispatch::bucket::format::null_reference;
@@ -84,7 +84,7 @@ impl GranteeInput {
             .set_email_address(self.email_address.clone())
             .set_uri(self.uri.clone())
             .r#type(Type::from(
-                self.grantee_type().unwrap_or(awscli_rust_s3::UNSET),
+                self.grantee_type().unwrap_or(testrust_s3::UNSET),
             ))
             .build()
             .map_err(|e| CommandError::new("Amazon.Runtime.AmazonClientException", e.to_string()))

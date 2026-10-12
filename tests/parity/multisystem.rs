@@ -9,11 +9,11 @@ use std::path::Path;
 use std::sync::atomic::Ordering;
 use std::sync::{Arc, Mutex};
 
-use awscli_rust_clients::MultiSystemClient;
-use awscli_rust_config::{EnumBucketTypes, MultiSystemClientConfig, UserData};
-use awscli_rust_s3::S3Client;
 use route_server::{RouteServer, routes};
 use serde_json::{Value, json};
+use testrust_clients::MultiSystemClient;
+use testrust_config::{EnumBucketTypes, MultiSystemClientConfig, UserData};
+use testrust_s3::S3Client;
 use tracing::field::{Field, Visit};
 use tracing::{Event, Level, Subscriber};
 use tracing_subscriber::Layer;

@@ -1,6 +1,6 @@
 # Controller·Worker 분산 부하 테스트
 
-Worker는 HTTP 서버로 실행하고 Controller는 기존 awscli-rust 명령으로 테스트를 전달합니다. Controller는 테스트가 끝날 때까지 준비 상태, heartbeat, 통계와 최종 결과를 수집합니다. S3 요청은 각 Worker에서 직접 전송합니다.
+Worker는 HTTP 서버로 실행하고 Controller는 기존 TestRust 명령으로 테스트를 전달합니다. Controller는 테스트가 끝날 때까지 준비 상태, heartbeat, 통계와 최종 결과를 수집합니다. S3 요청은 각 Worker에서 직접 전송합니다.
 
 ## 설정과 실행
 
@@ -48,21 +48,21 @@ SecretKey = worker-specific-secret-key
 Controller는 각 Worker의 로컬 사용자 설정 여부를 먼저 확인합니다. 로컬 설정을 쓰는 Worker에는 Controller 자격 증명을 전송하지 않습니다. 모든 Worker가 로컬 사용자를 설정했다면 Controller의 `[Main User]`는 생략할 수 있습니다. 혼합 구성에서는 로컬 설정이 없는 Worker를 위한 Controller 사용자 정보가 필요합니다. 실행 시 설정 출처만 출력하며 자격 증명은 상태 응답이나 결과에 포함하지 않습니다.
 
 ```text
-awscli-rust --worker --config=worker.ini
-awscli-rust --controller --test-prepare --config=config.ini
-awscli-rust --controller --test-get --config=config.ini
-awscli-rust --controller --test-put --config=config.ini
-awscli-rust --controller --test-mix --config=config.ini
-awscli-rust --controller --test-delete --config=config.ini
+TestRust --worker --config=worker.ini
+TestRust --controller --test-prepare --config=config.ini
+TestRust --controller --test-get --config=config.ini
+TestRust --controller --test-put --config=config.ini
+TestRust --controller --test-mix --config=config.ini
+TestRust --controller --test-delete --config=config.ini
 ```
 
-awscli-rust는 단일 실행 파일이므로 별도 런타임이 필요 없습니다. Worker는 내부 테스트망의 신뢰된 Controller가 접근하는 서비스를 전제로 합니다. 인터넷 공개용 인증·권한 체계는 포함하지 않습니다.
+TestRust는 단일 실행 파일이므로 별도 런타임이 필요 없습니다. Worker는 내부 테스트망의 신뢰된 Controller가 접근하는 서비스를 전제로 합니다. 인터넷 공개용 인증·권한 체계는 포함하지 않습니다.
 
-각 Worker는 하나의 실행만 처리합니다. `--controller` 없는 기존 CLI 명령은 로컬에서 실행합니다. 현재 분산 모드에서 지원하는 명령은 위의 다섯 가지입니다. `driver` 설정 이름은 COSBench의 형태를 따르지만 통신 프로토콜은 TESTCore·awscli-rust 전용입니다.
+각 Worker는 하나의 실행만 처리합니다. `--controller` 없는 기존 CLI 명령은 로컬에서 실행합니다. 현재 분산 모드에서 지원하는 명령은 위의 다섯 가지입니다. `driver` 설정 이름은 COSBench의 형태를 따르지만 통신 프로토콜은 TESTCore·TestRust 전용입니다.
 
 ## 부하와 동기화
 
-Worker 설정을 확인하려면 `awscli-rust --worker -c worker.ini --debug`로 실행합니다. 시작 시 설정 파일의 절대 경로, Worker 이름·주소, 작업·결과 경로, lease와 로컬 S3 접속 설정을 출력합니다. 로컬 사용자가 없으면 Controller의 테스트 요청을 기다린다고 표시합니다. 테스트를 수신하면 실제 적용된 S3 접속 설정, 부하 설정, Worker ID가 반영된 버킷·prefix를 출력합니다. AccessKey·SecretKey는 `***`로 표시하며 URL의 사용자 정보·쿼리·fragment는 제외합니다. Controller 모드의 `--debug` 출력은 지원하지 않습니다.
+Worker 설정을 확인하려면 `TestRust --worker -c worker.ini --debug`로 실행합니다. 시작 시 설정 파일의 절대 경로, Worker 이름·주소, 작업·결과 경로, lease와 로컬 S3 접속 설정을 출력합니다. 로컬 사용자가 없으면 Controller의 테스트 요청을 기다린다고 표시합니다. 테스트를 수신하면 실제 적용된 S3 접속 설정, 부하 설정, Worker ID가 반영된 버킷·prefix를 출력합니다. AccessKey·SecretKey는 `***`로 표시하며 URL의 사용자 정보·쿼리·fragment는 제외합니다. Controller 모드의 `--debug` 출력은 지원하지 않습니다.
 
 - Controller의 `[Default]`, `[UpDown]`, `[Main User]`와 CLI override로 실행 요청을 만듭니다. Worker의 로컬 `[Main User]`가 있으면 S3 접속 정보는 로컬 설정을 우선 적용합니다. 명령 종류·옵션도 필요하므로 `UpDownConfig`만 전송하지 않습니다.
 - `ThreadCount`는 Worker별 스레드 수, `FileCount`는 스레드별 개수입니다. 4개 Worker에 ThreadCount=10이면 총 40스레드입니다.
@@ -122,7 +122,7 @@ MIX 최종 콘솔 결과에는 `Read Average`, `Write Average`, `Total Average`�
 
 ## 혼합 구성
 
-.NET(TESTCore)과 Rust(awscli-rust) 구현은 같은 통신 계약을 쓰므로 섞어서 운영할 수 있습니다.
+.NET(TESTCore)과 Rust(TestRust) 구현은 같은 통신 계약을 쓰므로 섞어서 운영할 수 있습니다.
 
 -   .NET Controller + Rust Worker
 -   Rust Controller + .NET Worker

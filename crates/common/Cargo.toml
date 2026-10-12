@@ -1,5 +1,5 @@
 [package]
-name = "awscli-rust-common"
+name = "testrust-common"
 description = "여러 크레이트가 함께 쓰는 .NET 호환 유틸리티 (System.Text.Json 출력 형식 등)"
 version.workspace = true
 edition.workspace = true

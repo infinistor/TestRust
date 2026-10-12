@@ -4,8 +4,8 @@
 
 use std::path::Path;
 
-use awscli_rust_config::{Config, ConfigError};
 use serde_json::Value;
+use testrust_config::{Config, ConfigError};
 
 /// (픽스처 이름, 메인 사용자 섹션 이름, 기준 출력 이름)
 const CASES: &[(&str, Option<&str>, &str)] = &[
@@ -110,7 +110,7 @@ fn main_user_changes_are_seen_by_multi_system() {
 /// 기준 출력은 오라클이 `Console.WriteLine`으로 찍은 원문이라 끝에 줄바꿈이 하나 붙어 있다.
 #[test]
 fn json_text_matches_dotnet() {
-    use awscli_rust_common::dotnet_json::NEW_LINE;
+    use testrust_common::dotnet_json::NEW_LINE;
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/parity");
     let config = Config::load(root.join("config/full.ini"), None).unwrap();
     let expected = std::fs::read_to_string(root.join("baseline/config-raw/full.txt"))

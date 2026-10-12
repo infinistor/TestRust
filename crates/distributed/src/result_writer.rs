@@ -12,12 +12,12 @@ use std::fs::{File, OpenOptions};
 use std::io::{Seek, Write};
 use std::path::{Path, PathBuf};
 
-use awscli_rust_common::dotnet_json::{NEW_LINE, double_text};
-use awscli_rust_common::{DotnetDateTime, DotnetDateTimeOffset, to_dotnet_json};
-use awscli_rust_s3::s3_client::error::full_path;
-use awscli_rust_scenarios::ScenarioError;
-use awscli_rust_scenarios::input::io_error as path_error;
 use serde::Serialize;
+use testrust_common::dotnet_json::{NEW_LINE, double_text};
+use testrust_common::{DotnetDateTime, DotnetDateTimeOffset, to_dotnet_json};
+use testrust_s3::s3_client::error::full_path;
+use testrust_scenarios::ScenarioError;
+use testrust_scenarios::input::io_error as path_error;
 
 use crate::console::{self, FormatOptions};
 use crate::contracts::{RunResult, RunSnapshot, WorkloadSettings};

@@ -6,8 +6,8 @@
 //! 원본 `FullTest`는 Prepare → ReadV2 → 버킷 비우기(삭제 포함)를 차례로 실행한다. Ctrl+C는 실행 중인 테스트만
 //! 멈추므로(`scenarios::shutdown`) 뒤 단계는 원본처럼 그대로 실행된다.
 
-use awscli_rust_scenarios::clear::ClearTest;
-use awscli_rust_scenarios::up_down::UpDownTest;
+use testrust_scenarios::clear::ClearTest;
+use testrust_scenarios::up_down::UpDownTest;
 
 use super::super::{CommandContext, CommandResult, not_ported};
 use crate::menu::MenuList;

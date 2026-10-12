@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# TESTCore(.NET)와 awscli-rust(Rust)를 같은 KSAN·같은 부하로 번갈아 실행해 처리량·평균 지연·최대 메모리를 비교한다.
+# TESTCore(.NET)와 TestRust(Rust)를 같은 KSAN·같은 부하로 번갈아 실행해 처리량·평균 지연·최대 메모리를 비교한다.
 #
-#   ./compare.sh --net-ini testcore.ini --rs-ini awscli-rust.ini [--rounds 3] [--threads 32] [--times 60]
-#                [--size 1M] [--files 32] [--net ./testcore/TESTCore] [--rs ./awscli-rust] [--out results]
-#                [--bucket 이름 [--prefix awscli-rust-perf/]]
+#   ./compare.sh --net-ini testcore.ini --rs-ini TestRust.ini [--rounds 3] [--threads 32] [--times 60]
+#                [--size 1M] [--files 32] [--net ./testcore/TESTCore] [--rs ./TestRust] [--out results]
+#                [--bucket 이름 [--prefix testrust-perf/]]
 #
 # 각 INI는 접속 정보([Main User])와 버킷 이름([Default] BucketName)만 쓴다. 부하 값은 실행용 사본에서 덮어쓴다.
 # 버킷은 기본으로 도구별 `{BucketName}-perf-net`·`-perf-rs`를 만들고, 끝나면 비운 뒤 지운다.
@@ -13,8 +13,8 @@
 set -euo pipefail
 
 here=$(cd "$(dirname "$0")" && pwd)
-net_ini="" rs_ini="" rounds=3 threads=32 times=60 size=1M files=32 shared_bucket="" prefix="awscli-rust-perf/"
-net_exe="$here/testcore/TESTCore" rs_exe="$here/awscli-rust" out="$here/results" tolerance=10
+net_ini="" rs_ini="" rounds=3 threads=32 times=60 size=1M files=32 shared_bucket="" prefix="testrust-perf/"
+net_exe="$here/testcore/TESTCore" rs_exe="$here/TestRust" out="$here/results" tolerance=10
 while [ $# -gt 0 ]; do
 	case "$1" in
 		--net-ini) net_ini=$2; shift 2 ;;
@@ -191,7 +191,7 @@ awk -F, -v tol="$tolerance" -v endpoint="$endpoint" -v threads="$threads" -v tim
 		R_rss[kr] = $6; R_fail[kr] = $8 + $10; R_code[kr] = $4; R_el[kr] = $5
 	}
 	END {
-		print "# TESTCore(.NET) vs awscli-rust(Rust) 성능 비교\n"
+		print "# TESTCore(.NET) vs TestRust(Rust) 성능 비교\n"
 		printf "- 대상: %s, 버킷: %s\n", endpoint, buckets
 		printf "- 클라이언트: %s, %s 코어, 메모리 %.1f GiB\n", cpu_model, ncpu, mem_kib / 1048576
 		printf "- 부하: 스레드 %s, %s초, 파일 크기 %s, 스레드당 파일 %s개, 회차 %s(회차마다 실행 순서를 바꿔 번갈아 실행)\n", threads, times, size, files, rounds

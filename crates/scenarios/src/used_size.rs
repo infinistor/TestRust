@@ -31,15 +31,15 @@
 
 use std::time::Duration;
 
-use awscli_rust_common::dotnet_format::fixed;
-use awscli_rust_common::dotnet_http::status_name;
-use awscli_rust_config::util::random_text_long;
-use awscli_rust_config::{DbConfig, UsedSizeConfig, UserData};
-use awscli_rust_model::TimeWatcher;
-use awscli_rust_s3::s3_client::{PartETag, PutBody};
-use awscli_rust_s3::{S3Client, S3Error};
 use mysql_async::prelude::Queryable;
 use mysql_async::{Conn, OptsBuilder};
+use testrust_common::dotnet_format::fixed;
+use testrust_common::dotnet_http::status_name;
+use testrust_config::util::random_text_long;
+use testrust_config::{DbConfig, UsedSizeConfig, UserData};
+use testrust_model::TimeWatcher;
+use testrust_s3::s3_client::{PartETag, PutBody};
+use testrust_s3::{S3Client, S3Error};
 use tracing::{error, info};
 
 use crate::ScenarioError;

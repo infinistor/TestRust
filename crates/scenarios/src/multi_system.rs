@@ -20,19 +20,19 @@
 use std::sync::Arc;
 use std::sync::atomic::Ordering;
 
-use awscli_rust_clients::file_util::create_random_file;
-use awscli_rust_clients::multi_system::MultiSystemClient;
-use awscli_rust_common::dotnet_format::{align, decimal_text, fixed_aligned};
-use awscli_rust_config::enum_bucket_types::DEFAULT_DIVISION_COUNT;
-use awscli_rust_config::{
-    EnumBucketTypes, MainConfig, MultiSystemClientConfig, MultiSystemConfig, UserData,
-};
-use awscli_rust_model::units::file_size_unit;
-use awscli_rust_model::up_down_stats::log_info;
-use awscli_rust_model::{Average, TimeWatcher};
-use awscli_rust_s3::S3Client;
 use rust_decimal::Decimal;
 use std::path::Path;
+use testrust_clients::file_util::create_random_file;
+use testrust_clients::multi_system::MultiSystemClient;
+use testrust_common::dotnet_format::{align, decimal_text, fixed_aligned};
+use testrust_config::enum_bucket_types::DEFAULT_DIVISION_COUNT;
+use testrust_config::{
+    EnumBucketTypes, MainConfig, MultiSystemClientConfig, MultiSystemConfig, UserData,
+};
+use testrust_model::units::file_size_unit;
+use testrust_model::up_down_stats::log_info;
+use testrust_model::{Average, TimeWatcher};
+use testrust_s3::S3Client;
 use tokio_util::sync::CancellationToken;
 use tracing::{error, info};
 

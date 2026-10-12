@@ -31,9 +31,9 @@ use crc::{CRC_32_ISO_HDLC, Crc};
 use md5::Md5;
 use sha2::{Digest, Sha256};
 
-use awscli_rust_s3::S3Client;
 use http_capture::{CannedResponse, CaptureServer, CapturedRequest};
 use serde_json::Value;
+use testrust_s3::S3Client;
 use xml_canon::canonical_xml;
 
 const CASES: &[&str] = &[
@@ -437,7 +437,7 @@ type Outcome = (
 async fn run(spec: &Value, port: u16) -> Outcome {
     let flag = |key: &str, default: bool| spec.get(key).and_then(Value::as_bool).unwrap_or(default);
     let retry = spec.get("retry").and_then(Value::as_i64).unwrap_or(3) as i32;
-    let user = awscli_rust_config::UserData::new(
+    let user = testrust_config::UserData::new(
         format!("http://127.0.0.1:{port}"),
         "",
         "AKIAEXAMPLE",
@@ -714,8 +714,8 @@ async fn chunked_uploads_add_crc32_trailer() {
 // ---------------------------------------------------------------------------------------------
 
 use aws_sdk_s3::types::ServerSideEncryption;
-use awscli_rust_s3::s3_client::HttpVerb;
 use chrono::{DateTime, Duration, TimeZone, Utc};
+use testrust_s3::s3_client::HttpVerb;
 
 const PRESIGN_CASES: &[&str] = &[
     "presign-get",
@@ -818,7 +818,7 @@ async fn presigned_urls_match_dotnet() {
         let expected_url = baseline["result"].as_str().unwrap();
         let params = presign_params(spec["op"].as_str().unwrap());
 
-        let user = awscli_rust_config::UserData::new(
+        let user = testrust_config::UserData::new(
             "http://127.0.0.1:1".to_string(),
             "",
             "AKIAEXAMPLE",
@@ -892,7 +892,7 @@ async fn presigned_urls_match_dotnet() {
 /// .NET은 이미 지난 시각으로도 음수 `X-Amz-Expires` URL을 만들지만, Rust는 오류를 돌려준다(문서화된 차이).
 #[tokio::test]
 async fn presign_rejects_past_expiry() {
-    let user = awscli_rust_config::UserData::new("http://127.0.0.1:1".to_string(), "", "a", "s");
+    let user = testrust_config::UserData::new("http://127.0.0.1:1".to_string(), "", "a", "s");
     let client = S3Client::from_user(&user, false, 3, false);
     let error = client
         .generate_presigned_url(

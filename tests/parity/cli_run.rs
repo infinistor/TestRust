@@ -1,4 +1,4 @@
-//! 명령행 실행 비교: 같은 인자·설정·서버 응답으로 `awscli-rust`가 `TestCore.exe`와 같은 출력·종료 코드·요청을 내는지 본다.
+//! 명령행 실행 비교: 같은 인자·설정·서버 응답으로 `TestRust`가 `TestCore.exe`와 같은 출력·종료 코드·요청을 내는지 본다.
 //!
 //! 사례
 //! - 자동 사례(`baseline/cli-run/top.json`, `help.json`, `bare.json`): 최상위 흐름, 메뉴마다 `--X --help`,
@@ -8,7 +8,7 @@
 //! `dispatch::is_ported`가 `false`인 메뉴(원본 디스패처에 `case`가 없는 메뉴)의 사례는 건너뛴다.
 //!
 //! 기준 출력 다시 만들기(TESTCore HEAD 빌드 필요, `tests/parity/README.md`):
-//! `$env:TESTCORE_BIN = ...; cargo test -p awscli-rust-cli --test parity_cli_run -- --ignored generate`
+//! `$env:TESTCORE_BIN = ...; cargo test -p testrust-cli --test parity_cli_run -- --ignored generate`
 //! (`CLI_RUN_FILTER`에 이름 일부를 주면 그 사례만 다시 만든다)
 
 #[path = "support/cli_harness.rs"]
@@ -23,11 +23,11 @@ use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
 
-use awscli_rust_cli::dispatch::is_ported;
-use awscli_rust_cli::menu::MenuList;
-use awscli_rust_cli::options::{Action, OPTIONS, option_names, parse};
 use cli_harness::{CliCase, CliOutcome, OutputEncoding, diff, run_case, testcore_exe};
 use serde_json::Value;
+use testrust_cli::dispatch::is_ported;
+use testrust_cli::menu::MenuList;
+use testrust_cli::options::{Action, OPTIONS, option_names, parse};
 
 fn parity_dir() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/parity")
@@ -177,7 +177,7 @@ fn enabled(case: &CliCase) -> bool {
 
 #[tokio::test(flavor = "multi_thread")]
 async fn cli_run_matches_dotnet() {
-    let exe = Path::new(env!("CARGO_BIN_EXE_awscli-rust"));
+    let exe = Path::new(env!("CARGO_BIN_EXE_TestRust"));
     let mut expected = BTreeMap::new();
     let mut cases = Vec::new();
     for (group, group_cases) in auto_cases() {

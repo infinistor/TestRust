@@ -490,199 +490,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "awscli-rust-cli"
-version = "0.1.0"
-dependencies = [
- "aws-sdk-s3",
- "awscli-rust-clients",
- "awscli-rust-common",
- "awscli-rust-config",
- "awscli-rust-distributed",
- "awscli-rust-model",
- "awscli-rust-s3",
- "awscli-rust-scenarios",
- "axum",
- "base64 0.23.1",
- "chrono",
- "encoding_rs",
- "hex",
- "libmimalloc-sys",
- "md-5",
- "mimalloc",
- "quick-xml",
- "regex",
- "rust_decimal",
- "serde",
- "serde_json",
- "tempfile",
- "thiserror 2.0.21",
- "tokio",
- "tokio-util",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
-name = "awscli-rust-clients"
-version = "0.1.0"
-dependencies = [
- "aws-sdk-s3",
- "awscli-rust-common",
- "awscli-rust-config",
- "awscli-rust-model",
- "awscli-rust-s3",
- "base64 0.23.1",
- "bytes",
- "chrono",
- "hex",
- "http 1.5.0",
- "http-body-util",
- "hyper 1.11.1",
- "hyper-rustls 0.27.10",
- "hyper-util",
- "md-5",
- "rand 0.9.5",
- "rcgen",
- "rustls 0.23.45",
- "serde",
- "serde_json",
- "tempfile",
- "thiserror 2.0.21",
- "tokio",
- "tokio-rustls 0.26.6",
- "tokio-util",
- "tracing",
- "tracing-subscriber",
- "zeromq",
-]
-
-[[package]]
-name = "awscli-rust-common"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "rust_decimal",
- "serde",
- "serde_json",
- "thiserror 2.0.21",
-]
-
-[[package]]
-name = "awscli-rust-config"
-version = "0.1.0"
-dependencies = [
- "awscli-rust-common",
- "chrono",
- "rand 0.9.5",
- "regex",
- "serde",
- "serde_json",
- "thiserror 2.0.21",
- "tracing",
-]
-
-[[package]]
-name = "awscli-rust-distributed"
-version = "0.1.0"
-dependencies = [
- "awscli-rust-clients",
- "awscli-rust-common",
- "awscli-rust-config",
- "awscli-rust-model",
- "awscli-rust-s3",
- "awscli-rust-scenarios",
- "axum",
- "bytes",
- "chrono",
- "hex",
- "http 1.5.0",
- "http-body-util",
- "hyper 1.11.1",
- "hyper-rustls 0.27.10",
- "hyper-util",
- "rand 0.9.5",
- "regex",
- "rust_decimal",
- "rustls 0.23.45",
- "serde",
- "serde_json",
- "sha2 0.11.0",
- "tempfile",
- "tokio",
- "tokio-util",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
-name = "awscli-rust-model"
-version = "0.1.0"
-dependencies = [
- "awscli-rust-common",
- "awscli-rust-config",
- "chrono",
- "rust_decimal",
- "serde",
- "serde_json",
- "tokio-util",
- "tracing",
-]
-
-[[package]]
-name = "awscli-rust-s3"
-version = "0.1.0"
-dependencies = [
- "aws-sdk-s3",
- "awscli-rust-common",
- "awscli-rust-config",
- "base64 0.23.1",
- "bytes",
- "chrono",
- "crc",
- "hex",
- "hmac 0.13.0",
- "http 1.5.0",
- "http-body-util",
- "hyper 1.11.1",
- "hyper-rustls 0.27.10",
- "hyper-util",
- "md-5",
- "quick-xml",
- "rustls 0.23.45",
- "serde",
- "serde_json",
- "sha1 0.11.0",
- "sha2 0.11.0",
- "tempfile",
- "thiserror 2.0.21",
- "tokio",
- "tracing",
-]
-
-[[package]]
-name = "awscli-rust-scenarios"
-version = "0.1.0"
-dependencies = [
- "aws-sdk-s3",
- "awscli-rust-clients",
- "awscli-rust-common",
- "awscli-rust-config",
- "awscli-rust-model",
- "awscli-rust-s3",
- "base64 0.23.1",
- "chrono",
- "md-5",
- "mysql_async",
- "rand 0.9.5",
- "rust_decimal",
- "serde_json",
- "tempfile",
- "tokio",
- "tokio-util",
- "tracing",
-]
-
-[[package]]
 name = "axum"
 version = "0.8.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2962,6 +2769,199 @@ dependencies = [
  "once_cell",
  "rustix",
  "windows-sys 0.61.2",
+]
+
+[[package]]
+name = "testrust-cli"
+version = "0.1.0"
+dependencies = [
+ "aws-sdk-s3",
+ "axum",
+ "base64 0.23.1",
+ "chrono",
+ "encoding_rs",
+ "hex",
+ "libmimalloc-sys",
+ "md-5",
+ "mimalloc",
+ "quick-xml",
+ "regex",
+ "rust_decimal",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "testrust-clients",
+ "testrust-common",
+ "testrust-config",
+ "testrust-distributed",
+ "testrust-model",
+ "testrust-s3",
+ "testrust-scenarios",
+ "thiserror 2.0.21",
+ "tokio",
+ "tokio-util",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "testrust-clients"
+version = "0.1.0"
+dependencies = [
+ "aws-sdk-s3",
+ "base64 0.23.1",
+ "bytes",
+ "chrono",
+ "hex",
+ "http 1.5.0",
+ "http-body-util",
+ "hyper 1.11.1",
+ "hyper-rustls 0.27.10",
+ "hyper-util",
+ "md-5",
+ "rand 0.9.5",
+ "rcgen",
+ "rustls 0.23.45",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "testrust-common",
+ "testrust-config",
+ "testrust-model",
+ "testrust-s3",
+ "thiserror 2.0.21",
+ "tokio",
+ "tokio-rustls 0.26.6",
+ "tokio-util",
+ "tracing",
+ "tracing-subscriber",
+ "zeromq",
+]
+
+[[package]]
+name = "testrust-common"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "rust_decimal",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.21",
+]
+
+[[package]]
+name = "testrust-config"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "rand 0.9.5",
+ "regex",
+ "serde",
+ "serde_json",
+ "testrust-common",
+ "thiserror 2.0.21",
+ "tracing",
+]
+
+[[package]]
+name = "testrust-distributed"
+version = "0.1.0"
+dependencies = [
+ "axum",
+ "bytes",
+ "chrono",
+ "hex",
+ "http 1.5.0",
+ "http-body-util",
+ "hyper 1.11.1",
+ "hyper-rustls 0.27.10",
+ "hyper-util",
+ "rand 0.9.5",
+ "regex",
+ "rust_decimal",
+ "rustls 0.23.45",
+ "serde",
+ "serde_json",
+ "sha2 0.11.0",
+ "tempfile",
+ "testrust-clients",
+ "testrust-common",
+ "testrust-config",
+ "testrust-model",
+ "testrust-s3",
+ "testrust-scenarios",
+ "tokio",
+ "tokio-util",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "testrust-model"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "rust_decimal",
+ "serde",
+ "serde_json",
+ "testrust-common",
+ "testrust-config",
+ "tokio-util",
+ "tracing",
+]
+
+[[package]]
+name = "testrust-s3"
+version = "0.1.0"
+dependencies = [
+ "aws-sdk-s3",
+ "base64 0.23.1",
+ "bytes",
+ "chrono",
+ "crc",
+ "hex",
+ "hmac 0.13.0",
+ "http 1.5.0",
+ "http-body-util",
+ "hyper 1.11.1",
+ "hyper-rustls 0.27.10",
+ "hyper-util",
+ "md-5",
+ "quick-xml",
+ "rustls 0.23.45",
+ "serde",
+ "serde_json",
+ "sha1 0.11.0",
+ "sha2 0.11.0",
+ "tempfile",
+ "testrust-common",
+ "testrust-config",
+ "thiserror 2.0.21",
+ "tokio",
+ "tracing",
+]
+
+[[package]]
+name = "testrust-scenarios"
+version = "0.1.0"
+dependencies = [
+ "aws-sdk-s3",
+ "base64 0.23.1",
+ "chrono",
+ "md-5",
+ "mysql_async",
+ "rand 0.9.5",
+ "rust_decimal",
+ "serde_json",
+ "tempfile",
+ "testrust-clients",
+ "testrust-common",
+ "testrust-config",
+ "testrust-model",
+ "testrust-s3",
+ "tokio",
+ "tokio-util",
+ "tracing",
 ]
 
 [[package]]

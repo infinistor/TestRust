@@ -1,5 +1,5 @@
 [package]
-name = "awscli-rust-config"
+name = "testrust-config"
 description = "INI 파서, Config, UserData (TESTCore Util/INIParser.cs, Data/Config/*)"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ repository.workspace = true
 publish.workspace = true
 
 [dependencies]
-awscli-rust-common.workspace = true
+testrust-common.workspace = true
 chrono.workspace = true
 rand.workspace = true
 regex.workspace = true

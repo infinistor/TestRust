@@ -3,7 +3,7 @@
 //! 옵션 칸 29자(넘치면 줄을 바꾸고 29칸 들여쓰기), 설명 첫 줄 51자, 다음 줄부터 49자에 31칸 들여쓰기.
 //! 너비는 UTF-16 코드 단위로 센다. 줄은 글자·숫자가 아닌 문자 뒤에서 나누고, 단어 중간에서 끊으면 `-`를 붙인다.
 
-use awscli_rust_common::dotnet_json::NEW_LINE;
+use testrust_common::dotnet_json::NEW_LINE;
 
 use super::definitions::OPTIONS;
 use super::parser::option_names;

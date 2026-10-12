@@ -6,8 +6,8 @@
 //! - 태그 요소가 `null`이면 `item.Key`에서 `NullReferenceException`.
 
 use aws_sdk_s3::types::Tag;
-use awscli_rust_common::json::{Deserializer, FromJson, JsonError, Token};
-use awscli_rust_s3::UNSET;
+use testrust_common::json::{Deserializer, FromJson, JsonError, Token};
+use testrust_s3::UNSET;
 
 use super::jsonutil::read_list;
 use super::{CommandError, built, null_reference};

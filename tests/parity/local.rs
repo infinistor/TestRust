@@ -7,10 +7,10 @@
 use std::path::Path;
 use std::sync::{Arc, Mutex};
 
-use awscli_rust_clients::LocalClient;
-use awscli_rust_config::{EnumBucketTypes, UpDownClientConfig};
-use awscli_rust_model::TestClient;
 use serde_json::{Value, json};
+use testrust_clients::LocalClient;
+use testrust_config::{EnumBucketTypes, UpDownClientConfig};
+use testrust_model::TestClient;
 use tracing::field::{Field, Visit};
 use tracing::{Event, Level, Subscriber};
 use tracing_subscriber::Layer;

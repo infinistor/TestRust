@@ -4,8 +4,8 @@
 
 use std::path::Path;
 
-use awscli_rust_common::{DotnetDateTime, to_dotnet_json};
 use serde::{Serialize, Serializer};
+use testrust_common::{DotnetDateTime, to_dotnet_json};
 
 /// 원본 `UpDownResult`.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]

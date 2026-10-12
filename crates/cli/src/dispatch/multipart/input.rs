@@ -2,8 +2,8 @@
 //!
 //! `JsonSerializer.Deserialize<MultiParts>(text)`(기본 옵션: 대소문자 구분, 모르는 속성은 건너뜀)처럼 읽는다.
 
-use awscli_rust_common::json::{Deserializer, FromJson, JsonError, Token};
-use awscli_rust_s3::s3_client::PartETag;
+use testrust_common::json::{Deserializer, FromJson, JsonError, Token};
+use testrust_s3::s3_client::PartETag;
 
 /// `System.Nullable<int>`의 변환 오류 이름.
 const NULLABLE_INT: &str = "System.Nullable`1[System.Int32]";

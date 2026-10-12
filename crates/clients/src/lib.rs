@@ -5,12 +5,12 @@
 //! `LocalClient`([`local`]), `MultiSystemClient`([`multi_system`]).
 //!
 //! 이식하지 않은 것: `Jenkins/JenkinsManager.cs`, `Util/Curl.cs`. TESTCore 안에서 어디서도 쓰지 않는다
-//! (`JenkinsManager`·`Curl` 형식을 참조하는 코드가 없다). `JenkinsConfig`는 설정 파일 읽기용이라 `awscli-rust-config`에 있다.
+//! (`JenkinsManager`·`Curl` 형식을 참조하는 코드가 없다). `JenkinsConfig`는 설정 파일 읽기용이라 `testrust-config`에 있다.
 
 pub mod curl;
 pub mod file_util;
 mod http;
-pub use awscli_rust_common::json;
+pub use testrust_common::json;
 pub mod khttp;
 pub mod local;
 pub mod mover;
