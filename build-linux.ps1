@@ -17,7 +17,7 @@
 param(
 	[string]$OutputDir = (Join-Path $PSScriptRoot "dist\linux"),
 	[string[]]$Targets = @(
-		"root@192.168.11.156:/root/workspace/awscli-rest"
+		"root@192.168.11.156:/root/workspace/TestRust"
 	),
 	[switch]$SkipDeploy
 )

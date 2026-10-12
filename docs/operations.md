@@ -19,7 +19,7 @@ cargo build --release
 Windows 실행 파일(`.exe`)은 Linux에서 쓸 수 없다. Docker Desktop이 있는 Windows에서 저장소 루트의 `build-linux.ps1`(TESTCore `build.ps1`·`upload.ps1`과 같은 흐름)을 실행하면 `rust:alpine` 컨테이너에서 `x86_64-unknown-linux-musl` 정적 바이너리를 만들고 배포까지 한다. 대상 장비의 glibc 버전과 무관하게 실행되고 런타임 설치도 필요 없다.
 
 ```powershell
-pwsh ./build-linux.ps1                 # 빌드 후 기본 대상(root@192.168.11.156:/root/workspace/awscli-rest)에 배포
+pwsh ./build-linux.ps1                 # 빌드 후 기본 대상(root@192.168.11.156:/root/workspace/TestRust)에 배포
 pwsh ./build-linux.ps1 -SkipDeploy     # 빌드만
 pwsh ./build-linux.ps1 -Targets root@192.168.31.103:/root/workspace/TestRust, root@192.168.31.104:/root/workspace/TestRust
 ```

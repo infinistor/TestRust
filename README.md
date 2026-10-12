@@ -2,6 +2,8 @@
 
 Controller·Worker 분산 부하 테스트와 CSV 통계 수집은 [분산 테스트 사용법](DISTRIBUTED.md)을 참고하세요. 설정 예제: [일반](sample.ini), [Controller](controller.sample.ini), [Worker](worker.sample.ini). 빌드·배포·전환·롤백 절차는 [운영 절차](docs/operations.md)에 있습니다.
 
+Claude Code에서 부하 테스트 실행·서버 모니터링·결과 수집을 자동화하려면 [부하 테스트 스킬](#claude-code-부하-테스트-스킬-load-test)을 참고하세요.
+
 S3 Compatible 스토리지에 접근하고 기능·성능을 검증하기 위한 CLI 도구. 기존 .NET 기반 TESTCore를 Rust로 옮긴 것으로, `v1.0.0`에서 이식을 마쳤다(.NET 기준 구현은 TESTCore 태그 `dotnet-final`). 이식 당시 계획은 [RUST_MIGRATION.md](RUST_MIGRATION.md)에 있다.
 
 ## 용도
@@ -21,7 +23,7 @@ cargo build --release
 
 -   요구 사항: Rust stable. Windows에서는 Visual Studio Build Tools의 C++ 워크로드(MSVC 타깃 `x86_64-pc-windows-msvc`)가 필요하며, cargo는 PowerShell에서 실행한다(Git Bash의 `/usr/bin/link`가 MSVC `link.exe`를 가려 링크가 실패한다).
 -   Release 빌드 산출물: `target/release/TestRust`(Windows는 `TestRust.exe`). 런타임 설치는 필요 없다.
--   Windows 실행 파일(`.exe`)은 Linux에서 쓸 수 없다. Linux용 정적 바이너리(musl)는 Docker Desktop이 있으면 `pwsh ./build-linux.ps1`로 빌드·압축하고 테스트 장비에 배포한다(`-SkipDeploy`면 빌드만, 대상은 `-Targets`로 지정. [운영 절차](docs/operations.md#linux-정적-musl-바이너리) 참고). `rust:alpine` 컨테이너에서 직접 만들 때는 다음과 같다.
+-   Windows 실행 파일(`.exe`)은 Linux에서 쓸 수 없다. Linux용 정적 바이너리(musl)는 Docker Desktop이 있으면 `pwsh ./build-linux.ps1`로 빌드·압축하고 테스트 장비에 배포한다(기본 대상 `root@192.168.11.156:/root/workspace/TestRust`, `-SkipDeploy`면 빌드만, 대상은 `-Targets`로 지정. [운영 절차](docs/operations.md#linux-정적-musl-바이너리) 참고). `rust:alpine` 컨테이너에서 직접 만들 때는 다음과 같다.
     ```bash
     cargo build --release --target x86_64-unknown-linux-musl
     ```
@@ -119,6 +121,37 @@ TestRust --test-prepare --thread 10 --count 1000 --size 1M
 | 외부 연동 | `--test-mover`(ifsMover), `--pause` / `--resume`(S3backend 제어) |
 | 분산 | `--worker`, `--controller` ([DISTRIBUTED.md](DISTRIBUTED.md)) |
 
+## Claude Code 부하 테스트 스킬 (`/load-test`)
+
+Claude Code에서 `/load-test`로 Linux 클라이언트의 TestRust 부하 테스트를 실행하고, 서버·클라이언트 자원 사용량을 모니터링한 뒤 결과를 수집한다. 스킬은 저장소의 `.claude/skills/load-test/`에 있으며 pull 받으면 바로 사용할 수 있다. 절차 세부는 [SKILL.md](.claude/skills/load-test/SKILL.md)를 참고한다.
+
+```text
+/load-test servers=p-ksan-node-1,p-ksan-node-2 clients=192.168.31.191 type=put size=1M thread=50 prefix=FILE bucket=bench times=300
+/load-test config=tests/ksan-mix.conf thread=100
+```
+
+-   필수 입력: `servers`, `clients`(ssh 별칭·IP·user@host, 쉼표 구분), `type`(prepare/put/get/delete/mix 등), `size`, `thread`(클라이언트 1대당), `prefix`, `bucket`
+-   종류별 필수: prepare·get은 `count`, put·get·mix는 `times`(초). mix 비율은 `read`/`write`/`delete`
+-   설정 파일 형식과 기본값은 [run.conf.sample](.claude/skills/load-test/templates/run.conf.sample)을 참고한다. 명령행 값이 설정 파일보다 우선한다.
+-   S3 접속 정보는 클라이언트의 `testrust_config`(기본 `/root/workspace/TestRust/config.ini`)에서 읽는다.
+
+수집 항목
+
+| 대상 | 항목 |
+| --- | --- |
+| 서버 | CPU used·iowait, load 1/5/15, 메모리 used, swap used |
+| 클라이언트 | 위 항목 + TestRust 프로세스 CPU·RSS·스레드 수, TestRust 결과(`--save` JSON)와 로그 |
+
+-   실행 중에는 iowait·메모리 사용률, 테스트 전 대비 swap 증가량, 로그 ERROR, 비정상 종료를 감지해 경보를 표시한다.
+-   결과는 수집 호스트(기본: 첫 번째 클라이언트)의 `/root/testrust-results/<RunId>/`에 저장하고 `summary.md`·`summary.json`을 만든다. PC의 `.testruns/<RunId>/`에도 사본이 남는다.
+-   스크립트는 직접 실행할 수도 있다: `bash .claude/skills/load-test/scripts/run.sh check|start|status|wait|collect|abort`
+
+사전 조건
+
+-   PC에서 모든 서버·클라이언트로 ssh 키 인증(비밀번호 없이, known_hosts 등록 완료) 접속이 가능해야 한다.
+-   PC에 Git Bash(또는 bash)와 `python`이 필요하다.
+-   클라이언트에 TestRust 실행 파일과 설정 파일이 있어야 한다(기본 `/root/workspace/TestRust/TestRust`, `/root/workspace/TestRust/config.ini`. `pwsh ./build-linux.ps1`의 기본 배포 경로와 같다). 경로가 다르면 `testrust_cmd`, `testrust_config`로 지정한다.
+-   클라이언트가 2대 이상이면 객체 이름 충돌을 막기 위해 thread prefix 뒤에 `-<호스트>`가 붙는다. prepare와 get은 같은 클라이언트 목록으로 실행해야 한다.
 
 ## 전체 옵션
 
