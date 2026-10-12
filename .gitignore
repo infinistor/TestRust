@@ -12,3 +12,5 @@ tools/dotnet-oracle/obj/
 ksan.ini
 dist/
 gw.ini
+.testruns/
+__pycache__/

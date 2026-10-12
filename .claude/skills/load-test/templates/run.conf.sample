@@ -1,0 +1,51 @@
+# load-test 실행 설정 예시. key = value 형식이며 명령행 key=value가 이 값보다 우선한다.
+# 복사해서 사용: cp .claude/skills/load-test/templates/run.conf.sample tests/ksan-put.conf
+
+# ---- 대상 (필수) ----
+# ssh 접속 이름(~/.ssh/config Host 별칭), IP, user@host 모두 가능. 여러 개는 쉼표로 구분.
+servers = p-ksan-node-1,p-ksan-node-2,p-ksan-node-3
+clients = 192.168.31.191
+
+# ---- 테스트 (필수) ----
+# prepare | put | get | delete | mix | all ... (TestRust --test-<type>)
+type = put
+size = 1M
+# 클라이언트 1대당 스레드 수
+thread = 10
+prefix = FILE
+bucket = testrust-benchmark
+# prepare·get: count 필수 / put·get·mix: times(초) 필수 / delete: 선택
+count =
+times = 300
+# mix 비율 (선택)
+read =
+write =
+delete =
+
+# ---- 클라이언트의 TestRust (S3 접속 정보는 클라이언트의 testrust_config에서 읽음) ----
+testrust_cmd = /root/workspace/TestRust/TestRust
+testrust_config = /root/workspace/TestRust/config.ini
+# 실행 디렉터리 (기본: testrust_config 디렉터리)
+testrust_workdir =
+# 그 밖의 TestRust 옵션을 그대로 추가 (예: --md5sum --bucket-type 4)
+extra =
+# 클라이언트가 2대 이상이면 thread_prefix 뒤에 -<호스트>를 붙여 객체 이름 충돌 방지 (auto | none)
+thread_prefix = TH
+client_prefix = auto
+
+# ---- 수집·모니터링 ----
+# 결과 저장 호스트 (기본: 첫 번째 클라이언트)
+collect_host =
+result_dir = /root/testrust-results
+# 원격 임시 작업 경로와 샘플링 간격(초)
+remote_dir = /tmp/testrust-skill
+interval = 2
+# wait 명령의 조회 간격·주기 요약 간격(초)과 경보 기준
+poll = 15
+heartbeat = 60
+alert_iowait = 30
+alert_mem = 90
+# swap은 테스트 전 기준값 대비 증가량(MB)으로 판단
+alert_swap_mb = 512
+# 1이면 수집 후 원격 임시 파일 유지
+keep_remote = 0
