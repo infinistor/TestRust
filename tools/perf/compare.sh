@@ -178,7 +178,7 @@ awk -F, -v tol="$tolerance" -v endpoint="$endpoint" -v threads="$threads" -v tim
 	-v rounds="$rounds" -v files="$files" -v ncpu="$ncpu" -v mem_kib="$mem_kib" -v cpu_model="$cpu_model" \
 	-v buckets="$(if [ -n "$shared_bucket" ]; then echo "$shared_bucket(공용, 접두사 $prefix)"; else echo "$net_bucket / $rs_bucket"; fi)" '
 	function name(t) { return t == "net" ? "**.NET**" : "**Rust**" }
-	function pct(x, y) { return y > 0 ? sprintf("%.3f", x / y) : "-" }
+	function pct(x, y) { return y > 0 ? sprintf("%d", x / y * 100) : "-" }
 	NR == 1 || $2 == "prepare" { next }
 	{
 		t = $1; s = $2; r = $3; k = t SUBSEP s; kr = k SUBSEP r
@@ -198,7 +198,8 @@ awk -F, -v tol="$tolerance" -v endpoint="$endpoint" -v threads="$threads" -v tim
 		print "- 처리량: 성공 건수 ÷ 설정 시간. 평균 지연: 스레드 ÷ 처리량(리틀 법칙)."
 		print "- CPU 코어: (user + sys) ÷ 경과 초. CPU 사용률: CPU 코어 ÷ 장비 코어 수. CPU ms/op: (user + sys) ÷ 성공 건수."
 		print "- 메모리: 최대 RSS(VmHWM). 메모리 사용률: 최대 RSS ÷ 장비 메모리."
-		printf "- 판정: 처리량·평균 지연 비율이 ±%s%% 안이고 실패·비정상 종료가 없으면 통과(CPU·메모리는 기록만).\n\n", tol
+		printf "- 판정: 처리량·평균 지연 비율이 ±%s%% 안이고 실패·비정상 종료가 없으면 통과(CPU·메모리는 기록만).\n", tol
+		print "- 표의 값은 소수점 아래를 버린 정수다. Rust/.NET 행은 비율을 백분율(%)로 나타낸다(100 = 같음). 원시 값은 runs.csv에 있다.\n"
 
 		split("put get mix", list, " ")
 		print "## 요약(회차 평균)\n"
@@ -210,11 +211,11 @@ awk -F, -v tol="$tolerance" -v endpoint="$endpoint" -v threads="$threads" -v tim
 			for (j = 1; j <= 2; j++) {
 				t = j == 1 ? "net" : "rs"; k = t SUBSEP s
 				A_ops[t] = ops[k] / n[k]; A_lat[t] = lat[k] / n[k]; A_cor[t] = cor[k] / n[k]; A_cpo[t] = cpo[k] / n[k]
-				printf "| %s | %s | %.1f (%.1f~%.1f) | %.2f | %.2f | %.2f | %.3f | %.1f | %.2f | %d | |\n", s, name(t), A_ops[t], min[k], max[k], A_lat[t], A_cor[t], A_cor[t] / ncpu * 100, A_cpo[t], rss[k] / 1024, rss[k] / mem_kib * 100, fail[k]
+				printf "| %s | %s | %d (%d~%d) | %d | %d | %d | %d | %d | %d | %d | |\n", s, name(t), A_ops[t], min[k], max[k], A_lat[t], A_cor[t], A_cor[t] / ncpu * 100, A_cpo[t], rss[k] / 1024, rss[k] / mem_kib * 100, fail[k]
 			}
 			ratio = A_ops["net"] > 0 ? A_ops["rs"] / A_ops["net"] : 0; lratio = A_lat["net"] > 0 ? A_lat["rs"] / A_lat["net"] : 0
 			ok = (ratio >= 1 - tol / 100 && ratio <= 1 + tol / 100 && lratio >= 1 - tol / 100 && lratio <= 1 + tol / 100 && !fail[a] && !fail[b] && !bad[a] && !bad[b])
-			printf "| %s | Rust/.NET | %.3f | %.3f | %s | %s | %s | %s | %s | | %s |\n", s, ratio, lratio, pct(A_cor["rs"], A_cor["net"]), pct(A_cor["rs"], A_cor["net"]), pct(A_cpo["rs"], A_cpo["net"]), pct(rss[b], rss[a]), pct(rss[b], rss[a]), ok ? "통과" : "범위 밖"
+			printf "| %s | Rust/.NET %% | %d | %d | %s | %s | %s | %s | %s | | %s |\n", s, ratio * 100, lratio * 100, pct(A_cor["rs"], A_cor["net"]), pct(A_cor["rs"], A_cor["net"]), pct(A_cpo["rs"], A_cpo["net"]), pct(rss[b], rss[a]), pct(rss[b], rss[a]), ok ? "통과" : "범위 밖"
 		}
 
 		print "\n## 회차별 값\n"
@@ -231,9 +232,9 @@ awk -F, -v tol="$tolerance" -v endpoint="$endpoint" -v threads="$threads" -v tim
 					kr = k SUBSEP r
 					if (!(kr in R_ops)) continue
 					order = (r % 2 == 1) == (t == "net") ? 1 : 2
-					printf "| %s | %d | %d | %.1f | %.2f | %.2f | %.2f | %.3f | %.1f | %.1f | %.1f | %.2f | %d | %d |\n", name(t), r, order, R_ops[kr], R_lat[kr], R_cor[kr], R_cor[kr] / ncpu * 100, R_cpo[kr], R_cu[kr], R_cs[kr], R_rss[kr] / 1024, R_rss[kr] / mem_kib * 100, R_fail[kr], R_code[kr]
+					printf "| %s | %d | %d | %d | %d | %d | %d | %d | %d | %d | %d | %d | %d | %d |\n", name(t), r, order, R_ops[kr], R_lat[kr], R_cor[kr], R_cor[kr] / ncpu * 100, R_cpo[kr], R_cu[kr], R_cs[kr], R_rss[kr] / 1024, R_rss[kr] / mem_kib * 100, R_fail[kr], R_code[kr]
 				}
-				printf "| %s | 평균 | | %.1f | %.2f | %.2f | %.2f | %.3f | %.1f | %.1f | %.1f | %.2f | %d | |\n", name(t), ops[k] / n[k], lat[k] / n[k], cor[k] / n[k], cor[k] / n[k] / ncpu * 100, cpo[k] / n[k], cu[k] / n[k], cs[k] / n[k], rsum[k] / n[k] / 1024, rsum[k] / n[k] / mem_kib * 100, fail[k]
+				printf "| %s | 평균 | | %d | %d | %d | %d | %d | %d | %d | %d | %d | %d | |\n", name(t), ops[k] / n[k], lat[k] / n[k], cor[k] / n[k], cor[k] / n[k] / ncpu * 100, cpo[k] / n[k], cu[k] / n[k], cs[k] / n[k], rsum[k] / n[k] / 1024, rsum[k] / n[k] / mem_kib * 100, fail[k]
 			}
 		}
 	}' "$out/runs.csv" > "$out/summary.md"

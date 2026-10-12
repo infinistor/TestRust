@@ -92,7 +92,7 @@ TESTCore와 TestRust를 같은 KSAN·같은 부하로 번갈아 실행해 처리
     ./compare.sh --net-ini testcore.ini --rs-ini TestRust.ini
     ```
     기본값은 3회, 스레드 32, 60초, 크기 1M, 파일 32개이며 `--rounds`, `--threads`, `--times`, `--size`, `--files`로 바꾼다. 버킷은 도구별로 `{BucketName}-perf-net`·`-perf-rs`를 만들고 끝나면 비워서 지운다.
-5.  결과는 `results/summary.md`(표와 ±10% 판정), `results/runs.csv`(원시 값), `results/logs/`에 남는다.
+5.  결과는 `results/summary.md`(표와 ±10% 판정. 표의 값은 소수점 아래를 버린 정수, 비율은 Rust/.NET 백분율), `results/runs.csv`(원시 값), `results/logs/`에 남는다.
 
 .NET 쪽은 self-contained로 게시되어 런타임은 필요 없지만, Linux에서 `libicu`와 `libssl`이 설치되어 있어야 실행된다. TestRust는 정적 바이너리라 추가 라이브러리가 필요 없다.
 
