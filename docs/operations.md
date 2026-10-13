@@ -56,7 +56,7 @@ cargo test --workspace
 
 | 버전 | 커밋 | 내용 |
 | --- | --- | --- |
-| `v1.0.0` | `289204a` | TESTCore(.NET, `dotnet-final`) 이식 완료. 성능 비교는 [docs/perf/2026-10-08-ksan.md](perf/2026-10-08-ksan.md) |
+| `v1.0.0` | `289204a` | TESTCore(.NET, `v1.1.0`) 이식 완료. 성능 비교는 [docs/perf/2026-10-08-ksan.md](perf/2026-10-08-ksan.md) |
 | `v1.0.1` | (태그 참조) | Linux 정적 빌드의 할당기를 mimalloc(메모리 즉시 반환)으로 변경: Put 처리량 .NET과 동등, 요청당 CPU 감소. [docs/perf/2026-10-08-s3gw-155.md](perf/2026-10-08-s3gw-155.md) |
 
 ## TESTCore에서 전환
@@ -98,15 +98,15 @@ TESTCore와 TestRust를 같은 KSAN·같은 부하로 번갈아 실행해 처리
 
 ## 롤백 (TESTCore 다시 빌드)
 
-문제가 있으면 .NET TESTCore로 되돌린다. 전환 직전 최종 .NET 소스는 TESTCore 저장소의 태그 `dotnet-final`이다. 다음 명령은 해당 태그의 소스를 `git archive`로 임시 디렉터리에 내보내(TESTCore 작업 디렉터리는 건드리지 않는다) Release로 빌드하고 `TestCore.dll`이 있는 경로를 출력한다.
+문제가 있으면 .NET TESTCore로 되돌린다. 전환 직전 최종 .NET 소스는 TESTCore 저장소의 태그 `v1.1.0`이다. 다음 명령은 해당 태그의 소스를 `git archive`로 임시 디렉터리에 내보내(TESTCore 작업 디렉터리는 건드리지 않는다) Release로 빌드하고 `TestCore.dll`이 있는 경로를 출력한다.
 
 ```powershell
-pwsh tools/dotnet-oracle/build-testcore.ps1 -Ref dotnet-final
+pwsh tools/dotnet-oracle/build-testcore.ps1 -Ref v1.1.0
 ```
 
 -   `-Ref`는 TESTCore의 빌드할 커밋·태그다(생략하면 `HEAD`). `-TestCore`로 저장소 경로, `-Out`으로 빌드 위치를 바꿀 수 있다.
 -   출력 경로의 파일을 배포하고, 스크립트의 실행 파일 이름을 `TestCore`로 되돌린다. 설정 파일은 그대로 쓴다.
--   Linux용 self-contained 묶음은 `pwsh tools/perf/build-linux.ps1 -Ref dotnet-final`로 만든다.
+-   Linux용 self-contained 묶음은 `pwsh tools/perf/build-linux.ps1 -Ref v1.1.0`로 만든다.
 
 ## 기준 출력 갱신
 

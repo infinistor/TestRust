@@ -4,7 +4,7 @@ Controller·Worker 분산 부하 테스트와 CSV 통계 수집은 [분산 테�
 
 Claude Code에서 부하 테스트 실행·서버 모니터링·결과 수집을 자동화하려면 [부하 테스트 스킬](#claude-code-부하-테스트-스킬-load-test)을 참고하세요.
 
-S3 Compatible 스토리지에 접근하고 기능·성능을 검증하기 위한 CLI 도구. 기존 .NET 기반 TESTCore를 Rust로 옮긴 것으로, `v1.0.0`에서 이식을 마쳤다(.NET 기준 구현은 TESTCore 태그 `dotnet-final`). 이식 당시 계획은 [RUST_MIGRATION.md](RUST_MIGRATION.md)에 있다.
+S3 Compatible 스토리지에 접근하고 기능·성능을 검증하기 위한 CLI 도구. 기존 .NET 기반 TESTCore를 Rust로 옮긴 것으로, `v1.0.0`에서 이식을 마쳤다(.NET 기준 구현은 TESTCore 태그 `v1.1.0`). 이식 당시 계획은 [RUST_MIGRATION.md](RUST_MIGRATION.md)에 있다.
 
 ## 용도
 

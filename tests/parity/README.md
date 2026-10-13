@@ -21,10 +21,10 @@ TESTCore(.NET)와 TestRust의 외부 동작을 비교한다.
 
 `tools/dotnet-oracle`은 TESTCore 빌드 결과(`TestCore.dll`)를 그대로 호출해 기준 출력을 만든다.
 
-**TESTCore 저장소의 `bin/TestCore`는 예전 커밋으로 빌드된 것일 수 있다.** 기준 출력은 반드시 기준 구현 태그 `dotnet-final`(`ec427f2`, 지금의 TESTCore HEAD)로 빌드한 결과로 만든다. `build-testcore.ps1`이 지정한 커밋(`-Ref`, 기본 `HEAD`)의 소스를 임시 디렉터리로 내보내(`git archive`, TESTCore는 건드리지 않음) 빌드하고 그 경로를 출력한다.
+**TESTCore 저장소의 `bin/TestCore`는 예전 커밋으로 빌드된 것일 수 있다.** 기준 출력은 반드시 기준 구현 태그 `v1.1.0`(`ec427f2`, 지금의 TESTCore HEAD)로 빌드한 결과로 만든다. `build-testcore.ps1`이 지정한 커밋(`-Ref`, 기본 `HEAD`)의 소스를 임시 디렉터리로 내보내(`git archive`, TESTCore는 건드리지 않음) 빌드하고 그 경로를 출력한다.
 
 ```powershell
-$bin = pwsh tools/dotnet-oracle/build-testcore.ps1 -Ref dotnet-final
+$bin = pwsh tools/dotnet-oracle/build-testcore.ps1 -Ref v1.1.0
 dotnet build tools/dotnet-oracle -p:TestCoreBin=$bin
 $env:TESTCORE_BIN = $bin
 dotnet tools/dotnet-oracle/bin/Debug/net10.0/DotnetOracle.dll ini tests/parity/ini/sample.ini > tests/parity/baseline/ini/sample.json
@@ -38,7 +38,7 @@ pwsh tools/dotnet-oracle/gen-updown-cases.ps1   # UpDownClient 사례와 기준 
 -   `8d27dc2`: `updown/`, `local/`, `multisystem/`.
 -   `c83e35f`·`3c4b0ea`·`ec427f2`: 사용자 결정으로 고친 원본 버그(README의 "TESTCore에서 함께 고친 원본 버그"). 관련 시나리오·분산 사례의 기준 출력은 고친 뒤의 빌드로 만든다.
 
-.NET과 섞어 도는 테스트(`TESTCORE_BIN`이 있을 때만 도는 분산 E2E·Worker 비교 등)도 `dotnet-final` 빌드를 `TESTCORE_BIN`에 지정해 돌린다.
+.NET과 섞어 도는 테스트(`TESTCORE_BIN`이 있을 때만 도는 분산 E2E·Worker 비교 등)도 `v1.1.0` 빌드를 `TESTCORE_BIN`에 지정해 돌린다.
 
 Windows에서 .NET 콘솔은 파이프 출력에 시스템 코드 페이지(CP949)를 쓰므로 `TestCore.exe` 출력은 UTF-8로 바꿔서 수집한다(오라클은 UTF-8로 출력한다).
 

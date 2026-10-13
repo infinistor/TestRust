@@ -5,7 +5,7 @@
 #   $bin = pwsh tools/dotnet-oracle/build-testcore.ps1
 #   dotnet build tools/dotnet-oracle -p:TestCoreBin=$bin
 #   $env:TESTCORE_BIN = $bin
-#   pwsh tools/dotnet-oracle/build-testcore.ps1 -Ref dotnet-final   # 전환 시점의 .NET 기준 구현
+#   pwsh tools/dotnet-oracle/build-testcore.ps1 -Ref v1.1.0   # 전환 시점의 .NET 기준 구현
 param(
 	[string]$TestCore = "E:\Code\Git\TESTCore",
 	[string]$Ref = "HEAD",
